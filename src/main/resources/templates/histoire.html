@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/layout.html :: head(~{::title},~{::link}, ~{})">
+  <title>F.C.O | Histoire</title>
+  <link rel="stylesheet" th:href="@{/css/histoire.css}">
+</head>
+
+<body class="history_body" id="VieDuClub">
+	<header th:replace="fragment/layout.html :: top"></header>
+	<section class="secHistoire">
+		<h1 class="p-5 text-center">Notre Histoire</h1>
+		<div class="container col-sm-9 col-12 bg-light pb-5">
+			<div class="row d-flex justify-content-between pt-5 pb-lg-5 mx-lg-3 paragrapheRow" th:each="paragraph, iter : ${paragraphs}">
+				<div class="col-12 col-xl-6 d-flex align-items-center" th:data-aos="${iter.index % 2} ? 'fade-right' : 'fade-left'">
+					<p th:class="${iter.index % 2} ? 'paragraphText2' : 'paragraphText'" th:text="${paragraph.resume}"></p>
+				</div>
+				<div th:class="${iter.index % 2} ? 'col-12 col-xl-6 paragrapheImage2' : 'col-12 col-xl-6 paragrapheImage'" th:data-aos="${iter.index % 2} ? 'fade-left' : 'fade-right'">
+					<img class="img-fluid imgHistoire" th:src="${paragraph.picture}" th:alt="|Visuel paragraphe ${paragraph.id}|">
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<div class="divSeparator"></div>
+
+	<section class="sectionProPlayer py-5">
+		<h2 class="text-center titlehistory">Ils sont passés par le club</h2>
+		<div class="d-flex flex-row containerCard flex-wrap">
+			<div class="card ml-4 col-10 col-md-5 col-xl-2" style="width: 18rem;"
+				th:each="card : ${cards}">
+				<a th:href="${card.url}" target="blank"><img
+					class="card-img-top" th:src="${card.picture == ''} ? '/uploads/img/photoHistoire/default.jpg' : ${card.picture}"
+					alt="Card image cap"></a>
+				<div class="card-body">
+					<h4 th:text="${card.firstname + ' ' + card.lastname}">Patrick BARUL</h4>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section th:replace="fragment/sponsor.html :: sponsorbar"></section>
+	<footer th:replace="fragment/layout.html :: bottom"></footer>
+</body>
+
+	<div th:replace="fragment/layout.html :: script"></div>
+	<script>
+			AOS.init({
+				duration:1200,
+			});
+	</script>
+</html>
+

@@ -1,0 +1,73 @@
+.secContact {
+	background-color: #F6F4EA;
+}
+
+.secForm {
+	background-color: #1c1c1c;
+}
+
+.card {
+	box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	border-radius: 12px;
+	padding: 50px 15px;
+	text-align: center;
+	font-size: 18px;
+}
+
+.contactTitle {
+	font-size: 2rem;
+	margin-bottom: 30px;
+}
+
+.contactTitle:after {
+	content: "";
+	width: 4rem;
+	height: 6px;
+	background-color: #DC143C;
+	display: block;
+	margin: 0.9rem auto;
+	border-radius: 20px;
+}
+
+.socialLinks {
+	font-size: 25px;
+	color: #39424e;
+	margin-bottom: 15px;
+}
+
+.socialLinks a {
+	margin: 0.5em;
+}
+
+.discover {
+	font-weight: bold;
+}
+
+iframe {
+	width: 100%;
+	height: 100%;
+	border-radius: 12px;
+}
+
+.formTitle {
+	color: #fff;
+}
+
+label {
+	color: #fff;
+}
+
+textarea {
+	height: 200px;
+}
+
+.btn {
+	background-color: #DC143C;
+	color: #fff;
+	letter-spacing: 1px;
+}
+
+.btn:hover {
+	background-color: #DC1432;
+}

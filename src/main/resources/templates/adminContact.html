@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head>
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+	<link rel="stylesheet" href="/css/adminMessage.css">
+</head>
+
+<body>
+
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+
+	<div class="content">
+		<div class="container my-5 col-10 offset-1">
+			<h2>Modifier les informations de contact</h2>
+			<form method="post" th:action=@{/admin/contact} th:object="${contact}" class="my-5">
+				<input name="id" th:field="*{id}" type="hidden">
+				<div class="form-row">
+					<div class="form-group col-6">
+						<label for="contact-mail">Mail</label>
+						<input type="email" class="form-control" id="contact-mail" name="mail" th:field="*{mail}">
+					</div>
+					<div class="form-group col-6">
+						<label for="contact-phone">Téléphone</label>
+						<input type="tel" class="form-control" id="contact-phone" name="phone" th:field="*{phone}">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-4">
+						<label for="contact-fb">Facebook</label>
+						<input type="text" class="form-control" id="contact-fb" name="facebook" th:field="*{facebook}">
+					</div>
+					<div class="form-group col-4">
+						<label for="contact-insta">Instagram</label>
+						<input type="text" class="form-control" id="contact-insta" name="instagram" th:field="*{instagram}">
+					</div>
+					<div class="form-group col-4">
+						<label for="contact-yt">Youtube</label>
+						<input type="text" class="form-control" id="contact-yt" name="youtube" th:field="*{youtube}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="contact-address">Adresse</label>
+					<input type="text" name="address" class="form-control" id="contact-address" th:field="*{address}">
+				</div>
+				<div class="d-flex justify-content-between align-items-center">
+					<input type="submit" value="Modifier" class="btn btn-primary">
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<div th:replace="fragment/adminlayout.html :: toasts"></div>
+
+</body>
+
+</html>

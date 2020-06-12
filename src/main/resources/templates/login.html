@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head th:replace="fragment/layout.html :: head(~{::title},~{::link}, ~{})">
+  <title>F.C.O | Connexion</title>
+  <link rel="stylesheet" th:href="@{/css/styleLogin.css}">
+</head>
+
+<body>
+	<div class="sidenav">
+		<div class="login-main-text">
+			<h2>
+			   La page de connexion 
+			</h2>
+			<p>Se connecter ou S'inscrire </p>
+		</div>
+	</div>
+	<div class="main">
+		<div class="col-md-6 col-sm-12">
+			<div class="login-form">
+				<div th:replace="fragment/adminlayout.html :: toasts"></div>
+				<form th:action="@{/login}" method="post">
+					<div class="form-group">
+						<label>Nom d'utilisateur</label>
+						<input type="text"class="form-control" name="username">
+					</div>
+					<div class="form-group">
+						<label>Mot de passe </label>
+						<input type="password"class="form-control" name="password">
+					</div>
+					<button type="submit" class="btn btn-black">Se connecter</button>
+					<a href="/logout" class="btn btn-secondary">Se déconnecter</a>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head th:replace="fragment/adminlayout.html :: head"></head>
+
+<body>
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+	
+	<div class="content my-5">
+		<div class="container my-5 col-10 offset-1">
+			<h3 th:text="${player.id} ? 'Modifier un joueur' : 'Ajouter un joueur'">Gestion des joueurs</h3>
+			<form method="post" th:action="@{/admin/player/update}" th:object="${player}" enctype="multipart/form-data">
+				<input name="id" th:field="*{id}" type="hidden">
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="player-lastname">Nom *</label>
+						<input type="text" id="player-lastname" name="lastname" th:field="*{lastname}" placeholder="John" class="form-control" required>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="player-firstname">Prénom *</label>
+						<input type="text" id="player-firstname" name="firstname" th:field="*{firstname}" placeholder="Doe" class="form-control" required>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="phoneNumber">Numéro de téléphone *</label>
+						<input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" placeholder="01 23 45 67 89" required>
+						<span class="alert alert-danger p-2" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="player-category">Catégorie *</label>
+						<select id="player-category" name="category" th:field="*{category}" class="form-control" required>
+							<option value="0">--</option>
+							<option value="staff">Staff</option>
+							<option value="joueur">Joueur</option>
+						</select>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="player-role">Rôle</label>
+						<select id="player-role" name="role" th:field="*{role}" class="form-control">
+							<option value="0">--</option>
+							<option value="entraineur">Entraineur</option>
+							<option value="staff">Staff</option>
+							<option value="gardien">Gardien</option>
+							<option value="défenseur">Défenseur</option>
+							<option value="milieu">Milieu</option>
+							<option value="attaquant">Attaquant</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="player-number">Numéro</label>
+						<input type="number" id="player-number" name="number" th:field="*{number}" class="form-control">
+					</div>
+					<div class="form-group col-md-4">
+						<label for="player-team">Equipe *</label>
+						<select id="player-team" name="team" th:field="*{team}" class="form-control" required>
+							<option value="0">--</option>
+							<option th:each="team : ${teams}" th:text="${team.name}" th:value="${team.id}">Team X</option>
+						</select>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="player-photo">Photo</label>
+						<input id="player-photo" name="photo" type="file" class="form-control-file">
+					</div>
+				</div>
+				<div class="d-flex justify-content-between align-items-center">
+					<input type="submit" th:value="${player.id} ? 'Modifier' : 'Créer'" class="btn btn-primary">
+					<a href="/admin/team"><i class="fas fa-arrow-left"></i> Retour en arrière</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

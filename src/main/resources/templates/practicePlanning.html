@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head>
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+	<link rel="stylesheet" href="/css/adminTableau.css">
+</head>
+
+<body>
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+	
+	<div class="content  my-5">
+		<h2 class="text-center">Modification du planning d'entraînement </h2>
+		<div class="mx-2 my-5 pl-5 d-flex justify-content-center">
+			<form th:action="|/admin/team/${team.id}/planning|" method="post" class="col-xl-8" th:object="${planning}">
+				<div class="row form-group d-flex align-items-center ">
+					<h3 class="col-xl-2">Lundi</h3>
+					<div class="col-xl-5 row d-flex justify-content-end align-items-baseline">
+						<label for="monday-start" class="col-xl-3">Début</label>
+						<input th:field="*{MondayStart}"type="time" id="monday-start" name="MondayStart" min="00:00" max="23:59"  class="col-xl-7 text-center form-control">
+						
+					</div>
+					<div class="col-xl-5 row d-flex justify-content-end align-items-baseline">
+						<label for="monday-end" class="col-xl-2">Fin</label>
+						<input th:field="*{MondayEnd}" type="time" id="monday-end" name="MondayEnd" min="00:00" max="23:59" class="col-xl-7 text-center form-control">
+					</div>
+				</div>
+				<div class="row form-group d-flex align-items-center ">
+					<h3 class="col-xl-2">Mardi</h3>
+					<div class="col-xl-5 row d-flex justify-content-end align-items-baseline">
+						<label for="tuesday-start" class="col-xl-3">Début</label>
+						<input th:field="*{TuesdayStart}" type="time" id="tuesday-start" name="TuesdayStart" min="00:00" max="23:59" class="col-xl-7 text-center form-control">
+					</div>
+					<div class="col-xl-5 row d-flex justify-content-end align-items-baseline">
+						<label for="tuesday-end" class="col-xl-2">Fin</label>
+						<input th:field="*{TuesdayEnd}" type="time" id="tuesday-end" name="TuesdayEnd" min="00:00" max="23:59"  class="col-xl-7 text-center form-control">
+					</div>
+				</div>
+				<div class="row form-group d-flex align-items-center ">
+					<h3 class="col-xl-2">Mercredi</h3>
+					<div class="col-xl-5 row d-flex justify-content-end align-items-baseline">
+						<label for="wednesday-start" class="col-xl-3">Début</label>
+						<input th:field="*{WednesdayStart}" type="time" id="wednesday-start" name="WednesdayStart" min="00:00" max="23:59" class="col-xl-7 text-center form-control">
+					</div>
+					<div class="col-xl-5 row d-flex justify-content-end align-items-baseline">
+						<label for="wednesday-end" class="col-xl-2">Fin</label>
+						<input th:field="*{WednesdayEnd}" type="time" id="wednesday-end" name="WednesdayEnd" min="00:00" max="23:59" class="col-xl-7 text-center form-control">
+					</div>
+				</div>
+				<div class="row form-group d-flex align-items-center ">
+					<h3 class="col-xl-2">Jeudi</h3>
+					<div class="col-xl-5 row d-flex justify-content-end align-items-baseline">
+						<label for="thursday-start" class="col-xl-3">Début</label>
+						<input th:field="*{ThursdayStart}" type="time" id="thursday-start" name="ThursdayStart" min="00:00" max="23:59" class="col-xl-7 text-center form-control">
+					</div>
+					<div class="col-xl-5 row d-flex justify-content-end align-items-baseline">
+						<label for="thursday-end" class="col-xl-2">Fin</label>
+						<input th:value="*{ThursdayEnd}" type="time" id="thursday-end" name="ThursdayEnd" min="00:00" max="23:59" class="col-xl-7 text-center form-control">
+					</div>
+				</div>
+				<div class="row form-group d-flex align-items-center ">
+					<h3 class="col-xl-2">Vendredi</h3>
+					<div class="col-xl-5 row d-flex justify-content-end align-items-baseline">
+						<label for="friday-start" class="col-xl-3">Début</label>
+						<input th:field="*{FridayStart}" type="time" id="friday-start" name="FridayStart" min="00:00" max="23:59"  class="col-xl-7 text-center form-control">
+					</div>
+					<div class="col-xl-5 row d-flex justify-content-end align-items-baseline">
+						<label for="friday-end" class="col-xl-2">Fin</label>
+						<input th:field="*{FridayEnd}" type="time" id="friday-end" name="FridayEnd" min="00:00" max="23:59"  class="col-xl-7 text-center form-control">
+					</div>
+				</div>
+				<div class="row form-group d-flex align-items-center ">
+					<h3 class="col-xl-2">Samedi</h3>
+					<div class="col-xl-5 row d-flex justify-content-end align-items-baseline">
+						<label for="saturday-start" class="col-xl-3">Début</label>
+						<input th:field="*{SaturdayStart}" type="time" id="saturday-start" name="SaturdayStart" min="00:00" max="23:59"  class="col-xl-7 text-center form-control">
+					</div>
+					<div class="col-xl-5 row d-flex justify-content-end align-items-baseline">
+						<label for="saturday-end" class="col-xl-2">Fin</label>
+						<input th:field="*{SaturdayEnd}" type="time" id="saturday-end" name="SaturdayEnd" min="00:00" max="23:59" class="col-xl-7 text-center form-control">
+					</div>
+				</div>
+				<div class="row form-group d-flex align-items-center ">
+					<h3 class="col-xl-2">Dimanche</h3>
+					<div class="col-xl-5 row d-flex justify-content-end align-items-baseline">
+						<label for="sunday-start" class="col-xl-3">Début</label>
+						<input th:field="*{SundayStart}" type="time" id="sunday-start" name="SundayStart" min="00:00" max="23:59"  class="col-xl-7 text-center form-control">
+					</div>
+					<div class="col-xl-5 row d-flex justify-content-end align-items-baseline">
+						<label for="sunday-end" class="col-xl-2">Fin</label>
+						<input th:field="*{SundayEnd}" type="time" id="sunday-end" name="SundayEnd" min="00:00" max="23:59" class="col-xl-7 text-center form-control">
+					</div>
+				</div>
+				<div  class="col-xl-12 text-center pt-5">
+					<button type="submit" class="btn btn-outline-dark col-xl-3">Envoyer</button>
+					<a  th:href="@{|/admin/team/${team.id}|}"><i class="fas fa-arrow-left"></i> Retour en arrière</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="fragment/adminlayout.html :: toasts"></div>
+
+</body>
+
+</html>

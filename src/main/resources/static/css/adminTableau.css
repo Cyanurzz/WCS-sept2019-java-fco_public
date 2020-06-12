@@ -1,0 +1,22 @@
+.divTitle {
+	background-color: #DC1432;
+	color: #fff;
+}
+
+.divMessage:nth-of-type(2n+1) {
+	background-color: #E4DDD3;
+}
+
+i:hover {
+	color: #DC1432;
+}
+
+.img-sponsor {
+	max-height: 100px;
+	max-width: 250px;
+}
+
+.edit-icons {
+	position: absolute;
+	right: 10px;
+}

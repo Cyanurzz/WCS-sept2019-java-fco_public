@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/layout.html :: head(~{::title},~{}, ~{})">
+  <title>F.C.O St Jean de la Ruelle | Shop</title>
+</head>
+
+
+<body class="product-v1 hidden-sn white-skin animated">
+	<header th:replace="fragment/layout.html :: top"></header>
+	<ul class="row mx-5 justify-content-between">
+		<li class="main navbar-nav">
+			<div class="clearfix my-4">
+				<h1>Detail Produit</h1>
+			</div>
+		</li>
+		<li class="nav-item navbar-nav my-4"><a
+			class="nav-link dark-grey-text font-weight-bold" th:href="|/cart?idPanier=${idPanier}|"
+			> <span
+				class="badge danger-color" th:text="${numberOfProduct}">4</span> <i
+				class="fas fa-shopping-cart blue-text" aria-hidden="true"></i> <span
+				class="clearfix d-none d-sm-inline-block">Panier</span>
+		</a></li>
+	</ul>
+	<div class="container ">
+		<section id="productDetails" class="pb-5">
+			<div class="card mt-5 hoverable">
+				<div class="row mt-5">
+					<div
+						class="col-lg-6 d-flex justify-content-center align-items-center">
+						<div>
+							<img th:src="@{${product.picture}}" alt="First slide"
+								class="img-fluid">
+						</div>
+					</div>
+				
+					<form class="col-lg-5 mr-3 text-center text-md-left"   th:action=@{/product/addToCart} method="get" >
+					<input type="hidden" th:value="${product.id}" name="idProduct" >
+						<h2
+							class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-1 ml-xl-0 ml-4">
+							<strong th:text="${product.name}">Sony headphones</strong>
+						</h2>
+
+						<h3
+							class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
+							<span class="red-text font-weight-bold"> <strong
+								th:text="|  ${product.price} € |">$49</strong>
+
+							</span>
+						</h3>
+
+						<div class="accordion md-accordion" id="accordionEx"
+							role="tablist" aria-multiselectable="true">
+
+							<div class="row my-3 mx-3">
+								<label class="col-7 col-md-3 col-lg-4 " th:if="${product.quantity== null}">Taile</label>
+								<input type="hidden" th:if="${product.quantity != null}" value="-" name="size" >
+								 <select  th:if="${product.quantity== null}"
+									class="browser-default custom-select col-4"  name ="size" >
+									<option value="XS" >XS</option>
+									<option value="S" >S</option>
+									<option value="M" >M</option>
+									<option value="L" >L</option>
+									<option value="XL" >XL</option>
+									<option value="XXL" >XXL</option>
+								</select>
+							</div>
+
+
+							<div class="row my-3 mx-3">
+								<label class="col-7 col-md-3  col-lg-4 "  >Quantité</label> 
+								<input  name ="quantity"
+									class="card col-4" value="1" min="1" max="100" step="1"
+									type="number" />
+							</div>
+
+							<div class="card ml-3">
+
+								<div class="card-header ml-1 " role="tab" id="headingOne1">
+									<a data-toggle="collapse" data-parent="#accordionEx"
+										href="#collapseOne1" aria-expanded="true"
+										aria-controls="collapseOne1">
+										<h5 class="mb-0">
+											Description <i class="fas fa-angle-down rotate-icon"></i>
+										</h5>
+									</a>
+								</div>
+
+								<div id="collapseOne1" class="collapse show" role="tabpanel"
+									aria-labelledby="headingOne1" data-parent="#accordionEx">
+									<div class="card-body" th:text="${product.description}" >Anim
+										pariatur cliche reprehenderit, enim eiusmod high life
+										accusamus terry richardson ad squid. 3 wolf moon officia aute,
+										non cupidatat skateboard dolor brunch. Food truck quinoa
+										nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+										aliqua put a bird on it squid single-origin coffee nulla
+										assumenda shoreditch et.</div>
+								</div>
+							</div>
+
+						</div>
+
+						<section class="buttonPanier">
+							<div class="mt-5">
+								<div class="col-md-12 col-12 ">
+									<div class="row mt-2 mb-4 ">
+										<div class="col-md-12 text-center text-md-left text-md-right">
+											<button type="submit" class="btn btn-primary btn-rounded" >
+												<i class="fas fa-cart-plus mr-2 " aria-hidden="true"></i>Ajouter
+												au panier
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					
+					</form>
+				</div>
+			</div>
+		</section>
+
+	</div>
+   
+	<section th:replace="fragment/sponsor.html :: sponsorbar"></section>
+	<footer th:replace="fragment/layout.html :: bottom"></footer>
+	<footer th:replace="fragment/layout.html :: script"></footer>
+</body>
+
+
+</html>

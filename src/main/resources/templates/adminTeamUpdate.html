@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+	<link rel = "stylesheet" href="/css/adminTableau.css">
+	<link rel = "stylesheet" href="/css/adminlayout.css">
+<body>
+
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+	
+	<nav class="d-flex justify-content-center mt-5">
+  		<div class="nav nav-tabs" id="nav-tab" role="tablist">
+    		<a class="nav-item nav-link active" id="nav-NextMatch" data-toggle="tab" href="#NextMatch">Prochain Match</a>
+    		<a class="nav-item nav-link" id="nav-Team" data-toggle="tab" href="#Team" role="tab">Équipe</a>
+    		<a class="nav-item nav-link" id="nav-Training" data-toggle="tab" href="#Training" role="tab">Entrainement</a>
+    		<a class="nav-item nav-link" id="nav-Param" data-toggle="tab" href="#Param" role="tab">Paramètre équipe</a>
+    	</div>
+    </nav>
+	
+	<div class="tab-content content" id="nav-tabContent">
+		<div class="tab-pane fade show active my-5 mx-5" id="NextMatch" role="tabpanel">
+			<h2 th:text="|Prochain match de l'équipe ${team.name} :|"></h2>
+			<p  th:text="${#dates.format(dateMatch, 'dd/MM/yyyy H:mm')}" class="dateNextMatch">date :  23 Nov 2020 20h20 </p> 
+			<h3 th:text="|Sélection :|"></h3>
+			<a class="btn my-2 offset-1" th:href="@{|/admin/team/${team.id}/meet|}"><i class="fas fa-plus"></i> Ajouter une date de rencontre</a>
+			<a class="btn my-2 offset-1" th:href="@{|/admin/team/${team.id}/selection|}"><i class="fas fa-plus"></i> Ajouter un joueur</a>
+			<div class="divTitle container col-12 d-flex py-2 border-bottom">	
+				<div class="sendInfos col-2">						
+					<p>Nom</p>
+				</div>
+				<div class="sendInfos col-2">
+					<p>Prénom</p>
+				</div>
+				<div class="sendDate col-2">						
+					<p>Rôle</p>
+				</div>
+				<div class="sendDate col-2">
+					<p>Numéro</p>
+				</div>
+				<div class="sendDate col-2">
+					<p>Team</p>
+				</div>
+				<div class="sendData col-2">
+					<p>Numéro de téléphone</p>
+				</div>
+			</div>
+			<div class="divMessage container col-12 d-flex py-2 border-bottom" th:each="player : ${listConvocation}" >
+				<div class="col-2">
+					<span th:text="|${player.lastname}|">Doe</span>
+				</div>
+				<div class="col-2">
+					<span th:text="|${player.firstname}|">John</span>
+				</div>
+				<div class="col-2">
+					<p th:text="${player.role}">Role</p>
+				</div>
+				<div class="col-2">
+					<p th:text="${player.number}">0</p>
+				</div>
+				<div class="col-2">
+					<p th:text="${player.team.name}">Equipe X</p>
+				</div>
+				<div class="sendData col-2">
+					<p>06 66 66 66 66</p>
+				</div>
+				<div class="d-flex flex-column edit-icons">
+					<a th:href="@{|/admin/player/invite/delete?idPlayer=${player.id}&idTeam=${player.team.id}|}" onclick="return confirm('Etes vous sûr de vouloir supprimer ce joueur ?')"><i class="fas fa-trash-alt"></i></a>
+				</div>
+			</div>
+		</div>
+  		<div class="tab-pane fade" id="Team" role="tabpanel">
+  			<div class="my-5">
+				<h2 th:text="|Gestion des Joueurs de l'équipe ${team.name}:|" class="offset-1"></h2>
+				<a class="btn my-2 offset-1" th:href="@{|/admin/team/${team.id}/player|}"><i class="fas fa-plus"></i> Ajouter un joueur</a>
+				<div class="divTitle container col-10 d-flex py-2 border-bottom">	
+					<div class="sendInfos col-3">
+						<p>Nom</p>
+					</div>
+					<div class="sendInfos col-3">
+						<p>Prénom</p>
+					</div>
+					<div class="sendDate col-1">
+						<p>Photo</p>
+					</div>
+					<div class="sendDate col-2">
+						<p>Rôle</p>
+					</div>
+					<div class="sendDate col-1">
+						<p>Numéro</p>
+					</div>
+					<div class="sendDate col-2">
+						<p>Team</p>
+					</div>
+				</div>
+				<div class="divMessage container col-10 d-flex py-2 border-bottom" th:each="player : ${players}">
+					<div class="col-3">
+						<span th:text="|${player.lastname}">Doe</span>
+					</div>
+					<div class="col-3">
+						<span th:text="|${player.firstname}">John</span>
+					</div>
+					<div class="col-1">
+						<img class="img-fluid" th:src="${player.photo == ''} ? '/img/photoJoueur/defaultPlayer.png' : ${player.photo}">
+					</div>
+					<div class="col-2">
+						<p th:text="${player.role}">Role</p>
+					</div>
+					<div class="col-1">
+						<p th:text="${player.number}">0</p>
+					</div>
+					<div class="col-2">
+						<p th:text="${player.team.name}">Equipe X</p>
+					</div>
+					<div class="d-flex flex-column edit-icons">
+						<a th:href="@{/admin/player/update(id=${player.id})}"><i class="fas fa-pen"></i></a>
+						<a th:href="@{|/admin/player/deleteFromTeam${player.id}|}" onclick="return confirm('Etes vous sûr de vouloir supprimer ce joueur de l'équipe ?')"><i class="fas fa-trash-alt"></i></a>
+					</div>
+				</div>
+			</div>
+  		</div>
+ 		<div class="tab-pane fade" id="Training" role="tabpanel">
+  			<div class="my-5">
+				<h2 class="offset-1" id="">Gestion des Entraînements :</h2>
+				<a class="btn my-2 offset-1" th:href="@{|/admin/team/${team.id}/planning|}"><i class="fas fa-plus"></i> Modifier l'entrainement :</a>
+				<div class="divTitle container col-10 d-flex py-2 border-bottom">
+					<div class="sendInfos col-4">
+						<p>Jour</p>
+					</div>
+					<div class="sendInfos col-4">
+						<p>Horaire début </p>
+					</div>
+					<div class="sendDate col-4">
+						<p>Horaire fin</p>
+					</div>
+				 </div>
+				<div class="divMessage container col-10 d-flex py-2 border-bottom" >
+					<div class="col-4">
+						<span>Lundi</span>
+					</div>
+					<div class="col-4">
+						<span th:text="${planning?.MondayStart}">9:00</span>
+					</div>
+					<div class="col-4">
+						<span th:text="${planning?.MondayEnd}">12:00</span>
+					</div>
+				</div>
+				<div class="divMessage container col-10 d-flex py-2 border-bottom" >
+					<div class="col-4">
+						<span>Mardi</span>
+					</div>
+					<div class="col-4">
+						<span th:text="${planning?.TuesdayStart}">9:00</span>
+					</div>
+					<div class="col-4">
+						<span th:text="${planning?.TuesdayEnd}">12:00</span>
+					</div>
+				</div>
+				<div class="divMessage container col-10 d-flex py-2 border-bottom" >
+					<div class="col-4">
+						<span>Mercredi</span>
+					</div>
+					<div class="col-4">
+						<span th:text="${planning?.wednesdayStart}">9:00</span>
+					</div>
+					<div class="col-4">
+						<span th:text="${planning?.wednesdayEnd}">12:00</span>
+					</div>
+				</div>
+				<div class="divMessage container col-10 d-flex py-2 border-bottom" >
+					<div class="col-4">
+						<span>Jeudi</span>
+					</div>
+					<div class="col-4">
+						<span th:text="${planning?.ThursdayStart}">9:00</span>
+					</div>
+					<div class="col-4">
+						<span th:text="${planning?.ThursdayEnd}">12:00</span>
+					</div>
+				</div>
+				<div class="divMessage container col-10 d-flex py-2 border-bottom" >
+					<div class="col-4">
+						<span>Vendredi</span>
+					</div>
+					<div class="col-4">
+						<span th:text="${planning?.FridayStart}">9:00</span>
+					</div>
+					<div class="col-4">
+						<span th:text="${planning?.FridayEnd}">12:00</span>
+					</div>
+				</div>
+				<div class="divMessage container col-10 d-flex py-2 border-bottom" >
+					<div class="col-4">
+						<span>Samedi</span>
+					</div>
+					<div class="col-4">
+						<span th:text="${planning?.SaturdayStart}">9:00</span>
+					</div>
+					<div class="col-4">
+						<span th:text="${planning?.SaturdayEnd}">12:00</span>
+					</div>
+				</div>
+				<div class="divMessage container col-10 d-flex py-2 border-bottom" >
+					<div class="col-4">
+						<span>dimanche</span>
+					</div>
+					<div class="col-4">
+						<span th:text="${planning?.SundayStart}">9:00</span>
+					</div>
+					<div class="col-4">
+						<span th:text="${planning?.SundayEnd}">12:00</span>
+					</div>
+				</div>
+			</div>
+		</div> 
+		<div class="tab-pane fade" id="Param" role="tabpanel">
+			<div class="container my-5 col-10 offset-1">
+				<div class="row d-flex justify-content-between">
+					<h3>Paramètre de l'équipe</h3>
+					<a th:href="@{|/admin/team/delete${team.id}|}" class="btn btn-danger" onclick="return confirm('Etes vous sûr de vouloir supprimer cette équipe ?')">Supprimer l'Équipe  <i class="fas fa-trash-alt"></i></a>
+				</div>
+				
+				
+				<form method="post" th:action="@{|/admin/team|}" th:object="${team}" enctype="multipart/form-data">
+					<input name="id" th:field="*{id}" type="hidden">
+					<div class="form-group col-12">
+						<label for="team-name">Nom de l'équipe *</label> 
+						<input	id="team-name" name="name" placeholder="Séniors 3" required th:field="*{name}" type="text" class="form-control">
+					</div>
+					<div class="form-group col-6">
+						<label for="team-photo">Photo de l'équipe</label> 
+						<input id="team-photo" name="image" th:field="*{image}" type="file" class="form-control-file">
+					</div>
+					<div class="form-group col-12">
+						<label for="team-pole">Pôle *</label> <select id="team-pole" name="pole" required th:field="*{pole}" class="form-control">
+							<option value="0">--</option>
+							<option th:each="pole : ${poles}" th:text="${pole.name}" th:value="${pole.id}">Pole X</option>
+						</select>
+					</div>
+					<div class="d-flex justify-content-between align-items-center">
+						<input type="submit" th:value="${team.id} ? 'Modifier' : 'Créer'" class="btn btn-primary"> 
+						<a th:href="@{|/admin/team/${team.id}|}"><i class="fas fa-arrow-left"></i> Retour en arrière</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+<div th:replace="fragment/layout.html :: script"></div>
+</html>

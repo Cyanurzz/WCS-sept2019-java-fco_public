@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head>
+
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+</head>
+
+<body>
+
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+	<div class="content my-5">
+		<nav>
+			<ul id="myTab" role="tablist" th:class="${product.id} ? 'd-none' : 'nav nav-tabs col-12 d-flex justify-content-center'">
+  				<li class="nav-item mx-1"><a class="nav-item nav-link active" id="goodiesLabel" data-toggle="tab" href="#goodies" role="tab" aria-controls="goodies" aria-selected="true"  th:text="${product.id} ? 'Modifier cet article ' : 'Ajouter un article'" ></a></li>
+  				<li class="nav-item mx-1"><a class="nav-item nav-link"        id="clothesLabel" data-toggle="tab" href="#clothes" role="tab" aria-controls="clothes" aria-selected="true" th:text="${product.id} ? 'Modifier ce vêtement ' : 'Ajouter un vêtement'"></a></li>
+			</ul>
+		</nav>
+
+	
+		<div class = "tab-content" id="myTabContent">
+			<div class="tab-pane fade show active tab-pane container my-5 col-10 offset-1" th:class="!${product.quantity} and ${product.id} ? 'd-none' : 'fade show active tab-pane container my-5 col-10 offset-1'" id="goodies" role="tabpanel" aria-labelledby="goodiesLabel">
+				<h3 th:text="${product.id} ? 'Modifier un Produit' : 'Créer un Produit'">Produit</h3>
+				<form method="post" th:action="@{/admin/adminShop/adminProduct}" th:object="${product}" enctype="multipart/form-data">
+					<input name="id" th:field="*{id}" id="id2" type="hidden">
+					<div class ="form-row">
+						<div class="form-group col-12 col-md-9">
+							<label for="name">Nom du produit *</label> 
+							<input id="name2" name="name" placeholder="nom du produit" required th:field="*{name}" type="text" class="form-control"> 
+						</div>
+						<div class="form-group col-12 col-md-3">
+							<label for="quantity">Quantité</label> 
+							<input id="quantity2" name="quantity" th:field="*{quantity}" type="number" class="form-control"> 
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6 col-12">
+							<label for = "price"> Prix *</label>
+							<input id="price2" name="price" required th:field="*{price}" type="number" step="0.01" class="form-control">
+						</div>
+						<div class="form-group col-md-5 col-12 offset-1">
+							<label for="picture">Image </label> 
+							<input id="picture2" name="picture" th:value="*{picture}" type="file" class="form-control-file"> 
+						</div>
+					</div>				
+					<div class = "form-group">
+						<label for="description"> Description *</label> 
+						<textarea id="description2" name="description" required th:field="*{description}" class="form-control"></textarea>
+					</div>
+					<div class="d-flex justify-content-between align-items-center">
+						<input type="submit" th:value="${product.id} ? 'Modifier' : 'Créer'" class= "btn btn-sucess">
+						<a href="/admin/adminShop"><i class="fas fa-arrow-left"></i> Retour en arrière</a>
+					</div>
+				</form>
+				<br>
+			</div>
+			
+			<div  th:class="!${product.quantity} and ${product.id} and ${product.quantityM} ? 'fade show active tab-pane container my-5 col-10 offset-1' : 'tab-pane container my-5 col-10 offset-1'" id="clothes" role="tabpanel" aria-labelledby="clothesLabel">
+				<h3 th:text="${product.id} ? 'Modifier un vetement' : 'Ajouter un Vêtement'">Produit</h3>
+				<form method="post" th:action="@{/admin/adminShop/adminProduct}" th:object="${product}" enctype="multipart/form-data">
+					<input name="id" th:field="*{id}" type="hidden">
+					<div class ="form-row">
+						<div class="form-group col-12">
+							<label for="name">Nom du produit *</label> 
+							<input id="name" name="name" placeholder="nom du produit" required th:field="*{name}" type="text" class="form-control"> 
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6 col-12">
+							<label for = "price"> Prix *</label>
+							<input id="price" name="price" required th:field="*{price}" type="number" step="0.01" class="form-control">
+						</div>
+						<div class="form-group col-md-5 col-12 offset-1">
+							<label for="picture">Image </label> 
+							<input id="picture" name="picture" th:value="*{picture}" type="file" class="form-control-file"> 
+						</div>
+					</div>				
+					<h4>Quantité par taille :</h4>
+					<div class= "form-row">
+					
+						<div class="form-group col-12 col-md-2">
+							<label for="quantityXs">Quantité XS </label> 
+							<input id="quantityXs" name="quantityXs" th:field="*{quantityXs}" type="number" class="form-control"> 
+						</div>
+						<div class="form-group col-12 col-md-2">
+							<label for="quantityS">Quantité S </label> 
+							<input id="quantityS" name="quantityS" th:field="*{quantityS}" type="number" class="form-control"> 
+						</div>
+						<div class="form-group col-12 col-md-2">
+							<label for="quantityM">Quantité M </label> 
+							<input id="quantityM" name="quantityM" th:field="*{quantityM}" type="number" class="form-control"> 
+						</div>
+						<div class="form-group col-12 col-md-2">
+							<label for="quantityL">Quantité L </label> 
+							<input id="quantityL" name="quantityXs" th:field="*{quantityL}" type="number" class="form-control"> 
+						</div>
+						<div class="form-group col-12 col-md-2">
+							<label for="quantityXl">Quantité XL </label> 
+							<input id="quantityXl" name="quantityXl" th:field="*{quantityXl}" type="number" class="form-control"> 
+						</div>
+						<div class="form-group col-12 col-md-2">
+							<label for="quantityXxl">Quantité XXL </label> 
+							<input id="quantityXxl" name="quantityXxl" th:field="*{quantityXxl}" type="number" class="form-control"> 
+						</div>
+					</div>
+					<div class = "form-group">
+						<label for="description"> Description *</label> 
+						<textarea id="description" name="description" required th:field="*{description}" class="form-control"></textarea>
+					</div>
+					<div class="d-flex justify-content-between align-items-center">
+						<input type="submit" th:value="${product.id} ? 'Modifier' : 'Créer'" class= "btn btn-sucess">
+						<a href="/admin/adminShop"><i class="fas fa-arrow-left"></i> Retour en arrière</a>
+					</div>
+				</form>
+				
+				<br>
+			</div>
+		</div>	
+	</div>
+
+</body>
+<div th:replace="fragment/layout.html :: script"></div>
+</html>
+
+
+
+

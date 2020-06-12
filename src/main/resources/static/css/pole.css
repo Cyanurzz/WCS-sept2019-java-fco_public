@@ -1,0 +1,159 @@
+/* Tab */
+
+.tab-content {
+	background-color: #1c1c1c;
+	color: #fff;
+}
+
+.moreInfo:after {
+	content: "";
+	width: 15rem;
+	height: 6px;
+	background-color: #DC143C;
+	display: block;
+	margin: 0.9rem auto;
+	border-radius: 20px;
+}
+
+.tab-nav .nav-item {
+	padding: 37px 20px 35px;
+	margin-left: 0;
+	font-weight: bold;
+}
+
+.moreInfo{
+	font-size:1.5em;
+}
+
+.tab-nav .nav-item.active {
+	color: #DC143C !important;
+}
+
+h1 {
+	font-size : 1em;
+}
+
+.tab-nav .nav-link.active:before {
+	opacity: 1;
+	-webkit-transform: scaleX(1);
+	transform: scaleX(1);
+}
+
+.tab-nav .nav-item:hover {
+	color: #DC143C !important;
+	transition: 0.2s;
+}
+
+.tab-nav .nav-link:before {
+	transition: 0s;
+}
+
+.pole-name {
+	position: absolute;
+	padding: 37px 20px 35px;
+	text-transform: uppercase;
+	color: #b7b7b7;
+}
+
+/* Tab Content */
+
+h2 {
+	color: #1c1c1c;
+}
+.mod{
+	color:black;
+	text-align:center;
+}
+.mod h3 {
+	text-transform:uppercase;
+}
+
+.tab-content {
+	background-size: cover;
+	background-position: center;
+}
+
+.playerInformation {
+	position: absolute;
+	clip-path: polygon(// line 191 0 0, 100% 0, 100% - $ sidebar-angle 100%, 0 100%);
+	width: 80%;
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 23% 100%);
+	background: rgba(27, 27, 27, 0.9);
+	bottom: 0;
+	right: 0;
+	height: 60px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.playerNumber {
+	display: flex;
+	align-items: center;
+	position: absolute;
+	width: 40%;
+	clip-path: polygon(0 0, 63% 0, 100% 100%, 0% 100%);
+	background: rgba(215, 72, 80, 0.9);
+	border-bottom: 0;
+	bottom: 0;
+	left: 0;
+	height: 60px;
+	color: white;
+	padding-left: 10px;
+}
+
+.teamPicture{
+	width:100vw;
+	height:700px;
+	object-fit: cover;
+}
+
+.btnModal {
+	background: rgba(27, 27, 27);
+	color: white;
+	border-radius: 0px;
+	border-bottom: solid 1px #fff;
+	padding: 1% 0 1% 0 !important;
+}
+
+.btnModal:nth-child(1) {
+	border-right: solid 1px #fff;
+}
+
+@media only screen and (max-width: 1270px) {
+	
+	.playerNumber, .playerInformation {
+		height: 20%;
+	}
+	
+	h3 {
+		font-size: 1rem;
+	}
+	
+	.playerInformation span {
+		font-size: 0.7rem;
+		
+	}	
+}
+
+@media only screen and (max-width: 990px) {
+	
+	.playerNumber, .playerInformation {
+		height: 25%;
+	}
+	
+	h3 {
+		font-size: 1rem;
+	}
+	
+	.btnModal:nth-child(1) {
+		border-right:0;
+	}
+	
+	.playerInformation span {
+		font-size: 0.9rem;
+		
+	}
+}
+

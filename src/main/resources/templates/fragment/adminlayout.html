@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
+
+<head th:fragment="head">
+    <meta charset="utf-8">
+    <title>F.C.O St Jean de la Ruelle</title>
+    <meta content="" name="description">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sulphur+Point&display=swap">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="/css/adminlayout.css">
+</head>
+
+<body>
+
+<div th:fragment="sidebar" class="sidebar">
+	<h1><a class="return-to-site" href="/">Retour au site</a></h1>
+	<div sec:authorize="hasAnyRole('SUPERADMIN', 'ADMIN')" class="side-list d-flex flex-column">
+		<a class="side-item" href="/admin"><i class="fas fa-fw fa-tachometer-alt"></i> Tableau de bord</a>
+		<a sec:authorize="hasRole('SUPERADMIN')" class="side-item" href="/admin/user"><i class="fas fa-user-shield"></i> Privilèges</a>
+    	<a class="side-item" href="/admin/backgrounds"><i class="far fa-images"></i> Backgrounds</a>
+		<a class="side-item" href="/admin/next-match"><i class="fas fa-futbol"></i> Prochain Match</a>
+		<a class="side-item" href="/admin/event"><i class="far fa-calendar-alt"></i> Evènements</a>
+		<a class="side-item" href="/admin/sponsor"><i class="far fa-handshake"></i> Partenaires</a>
+		<a class="side-item" href="/admin/article"><i class="far fa-newspaper"></i> Articles</a>
+		<a class="side-item" href="/admin/adminShop"><i class="fas fa-shopping-cart"></i> Boutique</a>
+		<a class="side-item" href="/admin/team"><i class="fas fa-users-cog"></i> Equipes</a>
+		<a class="side-item" href="/admin/player"><i class="fas fa-users"></i> Joueurs</a>
+		<a class="side-item" href="/admin/history"><i class="fas fa-history"></i> Histoire</a>
+		<a class="side-item" href="/admin/galerie"><i class="fas fa-photo-video"></i> Galerie</a>
+		<a class="side-item" href="/admin/staff"><i class="fas fa-sitemap"></i> Organigramme</a>
+		<a class="side-item" href="/admin/contact"><i class="fas fa-reply"></i> Infos de Contact</a>
+		<a class="side-item" href="/admin/adminOrders"><i class="fas fa-shopping-cart"></i> Commandes <span class="badge" th:text="${orderCount}"></span></a>
+
+		<a class="side-item" href="/admin/messages"><i class="fas fa-comments"></i> Messages <span class="badge" th:text="${messageCount}"></span></a>
+		<a class="side-item logoutButton" href="/logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+	</div>
+	<div sec:authorize="hasAnyRole('MANAGER')"class="side-list d-flex flex-column">
+		<a class="side-item" href="/admin"><i class="fas fa-fw fa-tachometer-alt"></i> Tableau de bord</a>
+		<a class="side-item" href="/admin/adminShop"><i class="fas fa-shopping-cart"></i> Boutique</a>
+		<a class="side-item" href="/admin/adminOrders"><i class="fas fa-shopping-cart"></i> Commandes</a>
+		<a class="side-item logoutButton" href="/logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+	</div>
+</div>
+
+<div aria-live="polite" aria-atomic="true" class="alerts animated animations" th:fragment="toasts">
+	<div role="alert" aria-live="assertive" aria-atomic="true" class="toast alert alert-success m-2" data-autohide="false" th:if="${successMessage}">
+		<div class="toast-header">
+			<strong class="mr-auto">Succès</strong>
+		</div>
+		<div class="toast-body">
+			<span th:text="${successMessage}">Successfully added.</span>
+		</div>
+	</div>
+			
+	<div role="alert" aria-live="assertive" aria-atomic="true" class="toast alert alert-danger m-2" data-autohide="false" th:if="${errorMessage}">
+		<div class="toast-header">
+			<strong class="mr-auto">Erreur</strong>
+		</div>
+		<div class="toast-body">
+			<span th:text="${errorMessage}">Something went wrong :/</span>
+		</div>
+	</div>
+</div>
+
+</body>
+
+</html>

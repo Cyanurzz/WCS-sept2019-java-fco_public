@@ -1,0 +1,24 @@
+.eventPicture{
+	border-radius : 15px;
+	transition: all 500ms;
+	transform:scale(0.95);
+}
+
+.eventPicture:hover{
+	transform:scale(1);
+	transition: all 500ms ease;
+}
+
+
+@media screen and (max-width: 365px) {
+  .navLink {
+    font-size :9pt;
+  }
+  
+}
+@media screen and (max-width: 390px) {
+	.title{
+		font-size : 20pt;
+	}
+  
+}

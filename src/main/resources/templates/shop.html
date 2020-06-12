@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/layout.html :: head(~{::title},~{::link}, ~{})">
+  <title>F.C.O | Shop</title>
+  <link rel="stylesheet" th:href="@{/css/shop.css}">
+</head>
+
+<body>
+	<header th:replace="fragment/layout.html :: top"></header>
+
+	<div class="container ">
+		<div class="row ">
+			<div class="main">
+				<ul class="row mx-5 justify-content-between">
+					<li class="main navbar-nav">
+						<div class="clearfix my-4">
+							<h1>Nos Produits</h1>
+						</div>
+					</li>
+					
+					<li class="nav-item navbar-nav my-4"><a
+						class="nav-link dark-grey-text font-weight-bold"
+						href="/cart"> <span
+							class="badge danger-color" th:text="${numberOfProduct}">4</span>
+							<i class="fas fa-shopping-cart blue-text" aria-hidden="true"></i>
+							<span class="clearfix d-none d-sm-inline-block">Panier</span>
+					</a></li>
+                   
+				</ul>
+				<div class="col-lg-12 ">
+					<div class="row">
+
+						<div class="col-lg-4 col-md-6 mb-4 "
+							th:each="product : ${Products}" data-aos="zoom-in"
+							data-aos-duration="1000">
+							<div class="card h-100">
+								<a th:href="|/product?id=${product.id}|" class="photoProduct"><img
+									class="card-img-top " th:src="@{${product.picture}}" alt=""></a>
+								<div class="card-body">
+									<h4 class="card-title">
+										<a href="#" th:text="${product.name}">Item One</a>
+									</h4>
+
+								</div>
+								<div class="card-footer">
+									<h5 th:text="|  ${product.price} € |">$24.99</h5>
+									<p class="card-text textOverFlow"
+										th:text="${product.description}">Lorem ipsum dolor sit
+										amet,consectetur adipisicing elit. Amet numquam aspernatur!</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+    <div th:replace="fragment/adminlayout.html :: toasts" class="col-3"></div>
+	<section th:replace="fragment/sponsor.html :: sponsorbar"></section>
+	<footer th:replace="fragment/layout.html :: bottom"></footer>
+</body>
+<div th:replace="fragment/layout.html :: script"></div>
+</html>

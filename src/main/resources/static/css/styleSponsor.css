@@ -1,0 +1,44 @@
+.firstLevelSponsor {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #F6F4EA;
+	flex-wrap: wrap;
+	height: auto;
+	padding: 20px;
+}
+
+.secondLevelSponsor {
+	display: flex;
+	flex-wrap: wrap;
+	background: #1c1c1c;
+	align-items: center;
+	justify-content: space-around;
+    height: auto;
+}
+
+.sponsorElement {
+	padding: 0;
+	margin: 10px 20px ;
+	height: 75px;
+}
+
+@media screen and (max-width:777px) {
+
+	.sponsorElement {
+    padding: 0;
+    margin: 10px 20px;
+    height: 70px;
+    }
+}
+
+
+
+@media screen and (max-width:382px) {
+
+	.sponsorElement {
+    padding: 0;
+    margin: 10px 20px;
+    height: 50px;
+    }
+}

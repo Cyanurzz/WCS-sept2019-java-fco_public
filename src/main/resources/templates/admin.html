@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
+
+<head>
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+	<link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body>
+
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+
+	<div class="content my-5">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xl-3 col-sm-6 mb-3" sec:authorize="hasAnyRole('SUPERADMIN', 'ADMIN')">
+					<div class="card text-white bg-primary h-100">
+						<div class="card-body">
+							<div class="card-body-icon">
+							<i class="fas fa-fw fa-comments"></i>
+							</div>
+							<div class="mr-5" th:text="|${messageCount} Nouveaux Messages !|">0 Nouveaux Messages !</div>
+						</div>
+						<a class="card-footer text-white clearfix small z-1" th:href="@{/admin/messages}">
+							<span class="float-left">Voir en détails</span>
+							<span class="float-right">
+								<i class="fas fa-angle-right"></i>
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xl-3 col-sm-6 mb-3" sec:authorize="hasAnyRole('SUPERADMIN', 'ADMIN')">
+					<div class="card text-white bg-warning h-100">
+						<div class="card-body">
+							<div class="card-body-icon">
+							<i class="fas fa-fw fa-calendar-alt"></i>
+							</div>
+							<div class="mr-5" th:text="|${eventCount} Evènements à venir !|">0 Evènements à venir !</div>
+						</div>
+						<a class="card-footer text-white clearfix small z-1" th:href="@{/admin/event}">
+							<span class="float-left">Voir en détails</span>
+							<span class="float-right">
+								<i class="fas fa-angle-right"></i>
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xl-3 col-sm-6 mb-3">
+					<div class="card text-white bg-success h-100">
+						<div class="card-body">
+							<div class="card-body-icon">
+							<i class="fas fa-fw fa-shopping-cart"></i>
+							</div>
+							<div class="mr-5" th:text="|${shopReservationCount} Nouveaux Articles commandés !|">0 Nouveaux Articles commandés !</div>
+						</div>
+						<a class="card-footer text-white clearfix small z-1" th:href="@{/admin/adminOrders}">
+							<span class="float-left">Voir en détails</span>
+							<span class="float-right">
+								<i class="fas fa-angle-right"></i>
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xl-3 col-sm-6 mb-3">
+					<div class="card text-white bg-danger h-100" sec:authorize="hasAnyRole('SUPERADMIN', 'ADMIN')">
+						<div class="card-body">
+							<div class="card-body-icon">
+							<i class="fas fa-fw fa-list"></i>
+							</div>
+							<div class="mr-5" th:text="|${inscriptionCount} Nouvelles Inscriptions !|">0 Nouvelles Inscriptions !</div>
+						</div>
+						<a class="card-footer text-white clearfix small z-1" th:href="@{/admin/event}">
+							<span class="float-left">Voir en détails</span>
+							<span class="float-right">
+								<i class="fas fa-angle-right"></i>
+							</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>	
+</html>

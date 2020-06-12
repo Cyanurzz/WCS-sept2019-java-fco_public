@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head>
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+	<link rel="stylesheet" href="/css/adminTableau.css">
+	<link rel="stylesheet" href="/css/adminMessage.css">
+</head>
+
+<body>
+
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+	
+		
+	
+	<div class="content my-5">
+		<h2 class="offset-1">Gérer la galerie</h2>
+		<a class="btn my-2 offset-1" href="/admin/galerie/update "><i class="fas fa-plus"></i> Ajouter une Photo</a>
+		<div class="divTitle container col-10 d-flex py-2 border-bottom">
+			<div class="col-2">
+				<p>id</p>
+			</div>
+			<div class="col-4">
+				<p>Titre</p>
+			</div>
+			<div class="col-4">
+				<p>Photo</p>
+			</div>
+		</div>
+		<div class="divMessage container col-10 d-flex py-2 border-bottom" th:each="galerie : ${galerieList}">
+			<div class="col-2">
+				<p th:text="${galerie.id}">id</p>
+			</div>
+			<div class="col-4">
+				<p th:text="${galerie.title}">titre de photo</p>
+			</div>
+			<div class="col-4">
+				<img class="img-fluid img-sponsor" th:src="${galerie.photo}" alt="image de club">
+			</div>
+			<div class="d-flex flex-column edit-icons">
+				<a th:href="@{|/admin/galerie/update?id=${galerie.id}}|"><i class="fas fa-edit"></i></a>
+				<a th:href="@{|/admin/galerie/delete?id=${galerie.id}|}" onclick="return confirm('Etes vous sûr de vouloir supprimer cette photo ?')"><i class="fas fa-trash-alt"></i></a>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+</body>
+</html>

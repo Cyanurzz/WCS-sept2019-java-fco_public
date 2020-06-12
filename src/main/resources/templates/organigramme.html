@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+	
+<head th:replace="fragment/layout.html :: head(~{::title},~{::link}, ~{})">
+  <title>F.C.O | Organigramme</title>
+  <link rel="stylesheet" th:href="@{/css/organigramme.css}">
+</head>
+	
+	<body>
+		<header th:replace="fragment/layout.html :: top"></header>
+		<section class="tab-nav">
+			<div class="container md-col-10 sm-col-12 md-offset-1 sm-offest-0">
+				<nav class="nav d-flex justify-content-center">
+					<a data-toggle="tab" class="nav-item nav-link active orgaTab" href="#admin" id="nav-orga-admin" >Organigramme Administratif</a>
+					<a data-toggle="tab" class="nav-item nav-link orgaTab" href="#sport" id="nav-orga-sport" >Organigramme Sportif</a>
+				</nav>
+			</div>
+		</section>
+		<section class="secOrga tab-content" th:style="|background-image: url(${backgroundOrga.path});|">
+			<div id="sport" class="tab-pane fade" role="tabpanel">
+				<div class="container col-11 tab-pane fade active show" id="sport">
+					<h2>Pole Sportif</h2>
+					<div class="row d-flex justify-content-around rowOrga)">
+						<div class="person-card mb-5" th:each="member : ${members}" th:if="${member.category == 'sportif'}">
+							<img class="person-img" th:src="${member.picture == ''} ? '/uploads/img/photoStaff/default.jpg' : ${member.picture}" th:alt="|${member.firstname} ${member.lastname}|"/>
+							<div class="person-info">
+								<div class="details-title d-flex flex-column">
+									<span th:text="|${member.firstname} ${member.lastname}|">John Doe</span>
+									<small th:text="|${member.fonction}|">
+										Président du Club
+									</small>
+								</div>
+								<div class="details-body" th:text="${member.description}">
+									Lorem ipsum dolor sit amet
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container col-11 tab-pane fade active show" id="admin" role="tabpanel">
+				<h2>Présidence du Club</h2>
+				<div class="row d-flex justify-content-around rowOrga">
+					<div class="person-card" th:each="member : ${members}" th:if="${member.category == 'president'}">
+						<img class="person-img" th:src="${member.picture == ''} ? '/uploads/img/photoStaff/default.jpg' : ${member.picture}" th:alt="|${member.firstname} ${member.lastname}|"/>
+						<div class="person-info">
+							<div class="details-title d-flex flex-column">
+								<span th:text="|${member.firstname} ${member.lastname}|">John Doe</span>
+								<small th:text="|${member.fonction}|">
+									Président du Club
+								</small>
+							</div>
+							<div class="details-body" th:text="${member.description}">
+								Lorem ipsum dolor sit amet
+							</div>
+						</div>
+					</div>
+				</div>
+				<h2>Bureau du Club</h2>
+				<div class="row d-flex justify-content-around rowOrga">
+					<div class="person-card" th:each="member : ${members}" th:if="${member.category == 'bureau'}">
+						<img class="person-img" th:src="${member.picture == ''} ? '/uploads/img/photoStaff/default.jpg' : ${member.picture}" th:alt="|${member.firstname} ${member.lastname}|"/>
+						<div class="person-info">
+							<div class="details-title d-flex flex-column">
+								<span th:text="|${member.firstname} ${member.lastname}|">John Doe</span>
+								<small th:text="|${member.fonction}|">
+									Président du Club
+								</small>
+							</div>
+							<div class="details-body" th:text="${member.description}">
+								Lorem ipsum dolor sit amet
+							</div>
+						</div>
+					</div>
+				</div>
+				<h2>Educateurs</h2>
+				<div class="row d-flex  justify-content-around rowOrgaEnd">
+					<div class="person-card" th:each="member : ${members}" th:if="${member.category == 'educateur'}">
+						<img class="person-img" th:src="${member.picture == ''} ? '/uploads/img/photoStaff/default.jpg' : ${member.picture}" th:alt="|${member.firstname} ${member.lastname}|"/>
+						<div class="person-info">
+							<div class="details-title d-flex flex-column">
+								<span th:text="|${member.firstname} ${member.lastname}|">John Doe</span>
+								<small th:text="|${member.fonction}|">
+									Président du Club
+								</small>
+							</div>
+							<div class="details-body" th:text="${member.description}">
+								Lorem ipsum dolor sit amet
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section th:replace="fragment/sponsor.html :: sponsorbar"></section>
+		<footer th:replace="fragment/layout.html :: bottom"></footer>
+	</body>
+	<div th:replace="fragment/layout.html :: script"></div>
+</html>

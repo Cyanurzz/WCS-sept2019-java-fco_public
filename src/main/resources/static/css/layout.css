@@ -1,0 +1,284 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Sulphur Point', sans-serif;
+	word-wrap: break-word;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+a, a:hover {
+	text-decoration: none;
+	color: inherit;
+}
+
+i:hover {
+	color: #DC143C;
+}
+
+/* Alerts */
+
+.alerts {
+	position: fixed;
+	top: 0;
+	right: 0;
+	margin-top: 100px;
+}
+
+.animations {
+	animation-name: fadeInDown, fadeOutUp;
+	-webkit-animation-name: fadeInDown, fadeOutUp;
+	
+	animation-duration: 1s, 1s;
+	-webkit-animation-duration: 1s, 1s;
+	
+	animation-delay: 0s, 4s;
+	-webkit-animation-delay: 0s, 4s;
+}
+
+/* Header & navbar */
+
+header {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	box-shadow: 0px 10px 14px -1px rgba(0, 0, 0, 0.1);
+}
+
+.bg-light {
+	background-color: white !important;
+}
+
+.login-div {
+	position: absolute;
+	right: 0;
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 20px;
+}
+
+.nav-item {
+	margin-left: 10px;
+}
+
+.nav-link, .dropdown-item {
+	color: #0E1111 !important;
+	position: relative;
+	text-transform: uppercase;
+}
+
+.dropdown-item {
+	font-size: 0.9rem;
+}
+
+.dropdown-item:active {
+	background-color: #DC143C;
+}
+
+.nav-link:before {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 2px;
+	bottom: 0;
+	left: 0;
+	background-color: #DC143C;
+	opacity: 0;
+	-webkit-transform: translateY(-10px);
+	transform: translateY(-10px);
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+
+.nav-link:hover:before {
+	opacity: 1;
+	-webkit-transform: scaleX(1);
+	transform: scaleX(1);
+}
+
+.login-icon {
+	margin-right: 20px;
+}
+
+.login-icon i {
+	font-size: 18px;
+}
+
+@media only screen and (max-width: 991px) {
+
+	.nav-link:before {
+		display: none;
+	}
+	
+	.login-div {
+		position: relative;
+	}
+	
+	.dropdown-menu {
+		border: none;
+	}
+	
+	.navbar-brand img {
+	width: 60px;
+	}
+}
+
+
+/*------footer-------*/
+
+footer img {
+    width: 100%;
+    text-align: center;
+}
+
+footer ul{
+    list-style: none;
+}
+footer li {
+   width: 100%;
+  
+}
+.container-fluid {
+    background-color: #1c1c1c;
+    border-top:1px solid #fff;
+}
+
+footer li a{
+    color:#F6F4EA;
+    text-decoration: none;
+    line-height: 1.66;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+footer li a:hover {
+    color:#DC143C;
+    transition: 300ms;
+    text-decoration: none;
+    
+}
+
+footer li img {
+    text-align: center;
+}
+footer h3{
+    text-transform: uppercase;
+    color: rgba(228, 221, 211, 0.568);
+    font-size: 1.1rem;
+    line-height: 2.14;
+    font-weight: bolder;
+    margin-bottom:0;
+    
+}
+
+.test {
+    display: flex;
+    width: 100%;
+}
+
+footer .logo {
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.footerNavLink nav a{
+	width: min-content;
+}
+
+.footerLogoBaniere {
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	
+}
+
+.footclub {
+	width: 30%;
+	height: auto;
+}
+
+.footerNavLink {
+	padding-left:3rem;
+}
+
+
+@media (min-width: 260px) and (max-width: 767px) {
+
+    .container-fluid{
+	    text-align: center;
+	}
+    .logo {
+		width: 154px;
+        height: auto;
+        margin-top: 30px;
+    }
+    .linkImg,.join-us {
+        display: none;
+    }
+    
+    .footClubsLiRow,.footclub {
+    	display: none;
+    }
+    
+    .footerNavLink {
+    	padding-left:0;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    
+    .linkImg {
+        height: 90px;
+        width: auto;
+        padding:13%;
+        
+    }
+    
+}
+
+@media (min-width:1200px) and (max-width:1362px){
+    .logo {
+    	padding:5%;
+    }
+    
+    .centre {
+    	padding:20%;
+    }
+    .fff,.district{
+        padding:25%;
+    }
+    
+    .footerLogoBaniere {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    }
+}
+
+@media (min-width:1363px)  {
+    .centre {
+        width:60%;
+        height:auto;
+    }
+    
+    footer .logo {
+    	width:145px;
+    	height:auto;
+    }
+    
+    .fff,.district{
+        max-height: 82px;
+        width: auto;
+    }
+    .linkImg {
+        margin-bottom: 30px;
+    }
+    .join-us {
+        margin-top:20px;
+    }
+    footer li img {
+    	text-align:center;
+    }
+}

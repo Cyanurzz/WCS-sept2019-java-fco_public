@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head th:replace="fragment/layout.html :: head(~{::title},~{::link}, ~{})">
+  <title>F.C.O | Article</title>
+  <link rel="stylesheet" th:href="@{/css/article.css}">
+</head>
+
+<body th:style="|background-image: url(${backgroundArticle.path});|">
+	<header th:replace="fragment/layout.html :: top"></header>
+	
+	<section class="article row col-12 col-lg-9 col-xl-7 mx-auto">
+	
+		<img class="img-fluid" th:src="${article.picture}"></img>
+	
+		<h1 th:text="${article.title}" class="cardTitle">Lorem ipsum donda modi a sol odit.</h1>
+		<div class="row details mx-auto col-12">
+			<p th:text="${article.division}" class="col-md-5 col-12 category"></p>
+			<p th:text="|Date de publications : ${#dates.format(article.date,'dd MMM yyyy')}|" class="update col-md-5 col-12 "></p>
+		</div>
+			<hr class="col-10 mx-auto" />
+
+
+		<p th:text="${article.content}" class="content col-12 px-5 mx-auto"></p>
+
+	</section>
+	
+	<section th:replace="fragment/sponsor.html :: sponsorbar"></section>
+	<footer th:replace="fragment/layout.html :: bottom"></footer>
+</body>
+
+<div th:replace="fragment/layout.html :: script"></div>
+</html>
+

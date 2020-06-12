@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head>
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+	<link rel="stylesheet" href="/css/adminTableau.css">
+</head>
+
+<body>
+
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+	
+	<div class="content my-5">
+		<h2 class="offset-1">Gérer l'historique du club</h2>
+		<a class="btn my-2 offset-1" href="/admin/history/paragraph/update"><i class="fas fa-plus"></i> Ajouter un paragraphe</a>
+		<div class="divTitle container col-10 d-flex py-2 border-bottom">
+			<div class="col-2">
+				<p>Paragraphe</p>
+			</div>
+			<div class="col-7">
+				<p>Aperçu</p>
+			</div>
+			<div class="col-3">
+				<p>Image</p>
+			</div>
+		</div>
+		<div class="divMessage container col-10 d-flex py-2 border-bottom" th:each="paragraph, iter : ${paragraphs}">
+			<div class="col-2">
+				<p th:text="${iter.index + 1}">Numéro</p>
+			</div>
+			<div class="col-7">
+				<p th:text="${paragraph.resume}">Aperçu</p>
+			</div>
+			<div class="col-3">
+				<img class="img-fluid img-sponsor" th:src="${paragraph.picture}" alt="Image de l'historique">
+			</div>
+			<div class="d-flex flex-column edit-icons">
+				<a th:href="@{/admin/history/paragraph/update(id=${paragraph.id})}"><i class="fas fa-pen"></i></a>
+				<a th:href="@{|/admin/history/paragraph/delete${paragraph.id}|}" onclick="return confirm('Etes vous sûr de vouloir supprimer ce paragraphe ?')"><i class="fas fa-trash-alt"></i></a>
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="fragment/adminlayout.html :: toasts"></div>
+	
+	<div class="content my-5">
+		<h2 class="offset-1">Gérer l'affichage des joueurs professionnelles</h2>
+		<a class="btn my-2 offset-1" href="/admin/history/card/update"><i class="fas fa-plus"></i> Ajouter une affiche</a>
+		<div class="divTitle container col-10 d-flex py-2 border-bottom">
+			<div class="col-2">
+				<p>Numéro</p>
+			</div>
+			<div class="col-2">
+				<p>Prénom</p>
+			</div>
+			<div class="col-2">
+				<p>Nom</p>
+			</div>
+			<div class="col-3">
+				<p>Photo</p>
+			</div>
+			<div class="col-3">
+				<p>Site Internet</p>
+			</div>	
+		</div>
+		<div class="divMessage container col-10 d-flex py-2 border-bottom" th:each="card : ${cards}">
+			<div class="col-2">
+				<p th:text="${card.id}">Numéro</p>
+			</div>
+			<div class="col-2">
+				<p th:text="${card.firstname}">prenom</p>
+			</div>
+			<div class="col-2">
+				<p th:text="${card.lastname}">Nom</p>
+			</div>
+			<div class="col-3">
+				<img class="img-fluid img-sponsor" th:src="${card.picture == ''} ? '/img/photoHistoire/default.png' : ${card.picture}" alt="Image de l'affiche">
+			</div>
+			<div class="col-3">
+				<p th:text="${card.url}">web</p>
+			</div>
+			<div class="d-flex flex-column edit-icons">
+				<a th:href="@{/admin/history/card/update(id=${card.id})}"><i class="fas fa-pen"></i></a>
+				<a th:href="@{|/admin/history/card/delete${card.id}|}" onclick="return confirm('Etes vous sûr de vouloir supprimer ce joueur ?')"><i class="fas fa-trash-alt"></i></a>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

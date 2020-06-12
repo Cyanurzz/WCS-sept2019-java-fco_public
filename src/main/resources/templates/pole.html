@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head th:replace="fragment/layout.html :: head(~{::title},~{::link}, ~{})">
+  <title th:text="'F.C.O | ' + ${#strings.capitalize(pole.name)}"></title>
+  <link rel="stylesheet" th:href="@{/css/pole.css}">
+</head>
+
+<body>
+	<header th:replace="fragment/layout.html :: top"></header>
+
+	<section class="tab-nav">
+		<div class="container">
+			<p class="pole-name d-none d-md-block" th:text="|Pôle ${pole.name}|">Pôle Formation</p>
+			<nav class="nav d-flex justify-content-center">
+				<a data-toggle="tab" th:each="team, iter : ${teams}" th:class="${iter.index == 0} ? 'nav-item nav-link active' : 'nav-item nav-link'" th:href="|#p${iter.index}|" th:text="${team.name}">Team</a>
+			</nav>
+		</div>
+	</section>
+	
+	<section class="tab-content" th:style="|background-image: url(${backgroundPole.path});|">
+		<div th:each="team, iter : ${teams}" th:class="${iter.index == 0} ? 'tab-pane fade active show pb-5' : 'tab-pane fade pb-5'" th:id="|p${iter.index}|">
+			<div >
+				<img class="teamPicture img-fluid" th:src="${team.image == ''} ? '/uploads/img/photoTeam/defaultTeam.jpg' : ${team.image}" alt="photo team">
+				<div class="d-flex flex-wrap">
+					<button type="button" class="btn col-lg-6 col-12 btnModal" data-toggle="modal" th:data-target="|#modal${team.id}|">Horaire d'entrainement</button>
+					<button type="button" class="btn col-lg-6 col-12 btnModal" data-toggle="modal" th:data-target="|#modalConvoc${team.id}|">Visualiser convocation de match</button>
+				</div>
+			</div>
+			<div th:id="|modal${team.id}|" class="modal fade bd-example-modal-lg mod" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-lg" role="document">
+			    <div class="modal-content">
+				<p class="mt-4 moreInfo">Horaires d'entrainements</p>
+			      <div class="container-hour" th:if="${team.training != null}">
+			      	<div class="content-hour">
+			      		<p th:text="'Lundi :    ' + ${#dates.format(team.training?.MondayStart,'HH:mm')}    + ' - ' + ${#dates.format(team.training?.MondayEnd,'HH:mm')}"></p>
+			      		<p th:text="'Mardi :    ' + ${#dates.format(team.training?.TuesdayStart,'HH:mm')}   + ' - ' + ${#dates.format(team.training?.TuesdayEnd,'HH:mm')}"></p>
+			      		<p th:text="'Mercredi : ' + ${#dates.format(team.training?.WednesdayStart,'HH:mm')} + ' - ' + ${#dates.format(team.training?.MondayEnd,'HH:mm')}"></p>
+			      		<p th:text="'Jeudi :    ' + ${#dates.format(team.training?.ThursdayStart,'HH:mm')}  + ' - ' + ${#dates.format(team.training?.ThursdayEnd,'HH:mm')}"></p>
+			      		<p th:text="'Vendredi : ' + ${#dates.format(team.training?.FridayStart,'HH:mm')}    + ' - ' + ${#dates.format(team.training?.FridayEnd,'HH:mm')}"></p>
+			      		<p th:text="'Samedi :   ' + ${#dates.format(team.training?.SaturdayStart,'HH:mm')}  + ' - ' + ${#dates.format(team.training?.SaturdayEnd,'HH:mm')}"></p>
+			      		<p th:text="'Dimanche : ' + ${#dates.format(team.training?.SundayStart,'HH:mm')}    + ' - ' + ${#dates.format(team.training?.SundayEnd,'HH:mm')} " class="mb-4"></p>
+			      	</div>
+	      		</div>
+	      		<div class="my-3" th:if="${team.training == null}">Les informations de l'équipe ne sont pas disponible</div>
+			    </div>
+			  </div>
+			</div>	
+			
+			<div th:id="|modalConvoc${team.id}|" class="modal fade bd-example-modal-lg mod" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					
+			    	<div class="modal-content">
+			    	<div class="modal-header">
+			    		<h1 class=" ">Convocation</h1>
+			    		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+			    	</div>
+			    		<div th:if="${team.convocation != null}">
+			    			<p class="mt-3" th:text="|Prochain match le ${#dates.format(team.convocation?.dateMatch, 'dd/MM/yyyy H:mm')} lieu du  match : ${team.convocation?.locationM}|"></p>
+			    			<p class="mb-5" th:text="|Prochaine convocation le ${#dates.format(team.convocation?.dateInvit, 'dd/MM/yyyy H:mm')} lieu de convocation  : ${team.convocation?.locationI}|"></p>
+
+							<div>
+							   <h2 class="mt-5 moreInfo">Les joueurs convoqués</h2>
+								<div class="row d-flex justify-content-center">
+									<div class="col-3 my-0 py-0" th:each="player : ${team.convocation?.selection}">
+										<p th:text="|${player.firstname} ${player.lastname}|"></p> 
+									</div>
+								</div>
+							</div>
+			    		</div>
+						<div class="mt-3 pb-3" th:if="${team.convocation == null}">Les informations de l'équipe ne sont pas disponnible</div>
+					</div>
+				</div>
+			</div>
+			
+			<h2 class="text-center py-5">Gardien</h2>
+			<div class="d-flex justify-content-around flex-wrap">
+				<div class="col-md-2 col-6 mx-2" th:each="player : ${team.players}" th:if="${player.role == 'gardien'}">
+					<img class="img-fluid" th:src="${player.photo == ''} ? '/img/photoJoueur/defaultPlayer.png' : ${player.photo}" th:alt="|${player.firstname} ${player.lastname}|">
+					<div class="row bondPhoto">
+						<div class="playerNumber">
+							<h3 th:text="${player.number}">00</h3>
+						</div>
+						<div class="playerInformation">
+							<span th:text="|${player.firstname} ${player.lastname}|"  >John Doe</span>
+							<span th:text="${player.role}"  >Staff</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h2 class="text-center py-5">Défenseur</h2>
+			<div class="d-flex justify-content-around flex-wrap">
+				<div class="col-md-2 col-6 mx-2" th:each="player : ${team.players}" th:if="${player.role == 'défenseur'}">
+					<img class="img-fluid" th:src="${player.photo == ''} ? '/img/photoJoueur/defaultPlayer.png' : ${player.photo}" th:alt="|${player.firstname} ${player.lastname}|">
+					<div class="row bondPhoto">
+						<div class="playerNumber">
+							<h3 th:text="${player.number}">00</h3>
+						</div>
+						<div class="playerInformation">
+							<span th:text="|${player.firstname} ${player.lastname}|"  >John Doe</span>
+							<span th:text="${player.role}"  >Staff</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h2 class="text-center py-5">Milieu</h2>
+			<div class="d-flex justify-content-around flex-wrap">
+				<div class="col-md-2 col-6 mx-2" th:each="player : ${team.players}" th:if="${player.role == 'milieu'}">
+					<img class="img-fluid" th:src="${player.photo == ''} ? '/img/photoJoueur/defaultPlayer.png' : ${player.photo}" th:alt="|${player.firstname} ${player.lastname}|">
+					<div class="row bondPhoto">
+						<div class="playerNumber">
+							<h3 th:text="${player.number}">00</h3>
+						</div>
+						<div class="playerInformation">
+							<span th:text="|${player.firstname} ${player.lastname}|"  >John Doe</span>
+							<span th:text="${player.role}"  >Staff</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h2 class="text-center py-5">Attaquant</h2>
+			<div class="d-flex justify-content-around flex-wrap">
+				<div class="col-md-2 col-6 mx-2" th:each="player : ${team.players}" th:if="${player.role == 'attaquant'}">
+					<img class="img-fluid" th:src="${player.photo == ''} ? '/img/photoJoueur/defaultPlayer.png' : ${player.photo}" th:alt="|${player.firstname} ${player.lastname}|">
+					<div class="row bondPhoto">
+						<div class="playerNumber">
+							<h3 th:text="${player.number}">00</h3>
+						</div>
+						<div class="playerInformation">
+							<span th:text="|${player.firstname} ${player.lastname}|"  >John Doe</span>
+							<span th:text="${player.role}"  >Staff</span>
+						</div>
+					</div>
+				</div>
+			</div>
+						<h2 class="text-center py-5">Staff</h2>
+			<div class="d-flex justify-content-around flex-wrap">
+				<div class="col-md-2 col-6 mx-2" th:each="player : ${team.players}" th:if="${player.category == 'staff'}">
+					<img class="img-fluid" th:src="${player.photo == ''} ? '/img/photoJoueur/defaultPlayer.png' : ${player.photo}" th:alt="|${player.firstname} ${player.lastname}|">
+					<div class="row bondPhoto">
+						<div class="playerNumber">
+							<h3 th:text="${player.number}">00</h3>
+						</div>
+						<div class="playerInformation">
+							<span th:text="|${player.firstname} ${player.lastname}|"  >John Doe</span>
+							<span th:text="${player.role}"  >Staff</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section th:replace="fragment/sponsor.html :: sponsorbar"></section>
+	<footer th:replace="fragment/layout.html :: bottom"></footer>
+</body>
+
+<div th:replace="fragment/layout.html :: script"></div>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head>
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+</head>
+
+<body>
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+
+	<div class="content">
+		<div class="container my-5 col-10 offset-1">
+			<h2 th:text="${user.id} ? 'Modifier un utilisateur' : 'Créer un utilisateur'">Gérer les utilisateurs</h2>
+			<form method="post" th:action=@{/admin/user/update} th:object="${user}" class="my-5">
+				<input name="id" th:field="*{id}" type="hidden">
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="team-name">Nom d'utilisateur *</label>
+						<input type="text" class="form-control" th:field="*{username}" required placeholder="johndoe123">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="team-divison">Email *</label>
+						<input type="text" class="form-control" th:field="*{email}" required placeholder="xyz@gmail.com">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="team-divison">Prenom *</label>
+						<input type="text" class="form-control" th:field="*{firstname}" required placeholder="Doe">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="team-divison">Nom *</label>
+						<input type="text" class="form-control" th:field="*{lastname}" required placeholder="John">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="team-divison">Password</label>
+						<input type="password" class="form-control" th:field="*{password}" placeholder="**********">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="user-role">Role</label>
+						<input type="text" id="user-role" class="form-control" th:value="*{role} ? 'ACTUEL : ' +  *{role} : 'PAS DE ROLE'" disabled required>
+						<select class="browser-default custom-select" name="role" th:field="*{role}">
+							<option th:value="*{role}" selected>Ne pas changer</option>
+							<option value="ADMIN">Admin</option>
+							<option value="EDUCATEUR">Educateur</option>
+							<option value="MEMBRE" >Membre</option>
+						</select>
+					</div>
+				</div>
+				<div class="d-flex justify-content-between align-items-center">
+					<input type="submit" th:value="${user.id} ? 'Modifier' : 'Créer'" class="btn btn-primary">
+					<a href="/admin/user"><i class="fas fa-arrow-left"></i> Retour en arrière</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+
+</html>

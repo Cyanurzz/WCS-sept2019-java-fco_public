@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
+
+<head th:fragment="head(title, links, scripts)">
+	<meta charset="UTF-8">
+	<title th:replace="${title}">F.C.O St Jean de la Ruelle</title>
+	<meta content="Site du F.C.O St Jean de la Ruelle" name="description">
+	<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+	<link rel="icon" href="/img/logoClub/fco-logo.png">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito&display=swap">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway&display=swap">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sulphur+Point&display=swap">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:700,900">
+	<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.7/dist/css/uikit.min.css" />
+	<link rel="stylesheet" href="/css/layout.css">
+	<link rel="stylesheet" href="/css/styleSponsor.css">
+	<th:block th:replace="${links}" />
+	<th:block th:replace="${scripts}" />
+</head>
+
+<body>
+    <header th:fragment="top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+                <img src="/img/logoClub/fco-logo.png" width="80px" alt="Logo F.C.O" class="d-inline-block align-middle mr-2">
+            </a>
+            <div class="login-div">
+				<a sec:authorize="isAnonymous()" class="login-icon" th:href="@{/login}"><i class="far fa-user"></i></a>
+				<div sec:authorize="isAuthenticated()">
+					<a class="nav-link dropdown-toggle mr-4" role="button" data-toggle="dropdown" sec:authentication="name">Profil</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" sec:authorize="hasAnyRole('SUPERADMIN', 'ADMIN', 'MANAGER')" th:href="@{/admin}">Administration</a>
+						<a class="dropdown-item" th:href="@{/profil}">Mon Profil</a>
+						<a class="dropdown-item" th:href="@{/logout}">Déconnexion</a>
+					</div>
+				</div>
+			</div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Club
+                        </a>
+                        <div class="dropdown-menu nav-dropdown bg-light" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/history">Historique</a>
+                        	<a class="dropdown-item" href="/organizationalChart">Organigramme</a>
+                    	</div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/events}">Évènements</a>
+                    </li>
+					<li class="nav-item">
+                        <a class="nav-link" href="/pole/seniors">Séniors</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Pôles
+                        </a>
+                        <div class="dropdown-menu nav-dropdown bg-light" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/pole/formation">Formation</a>
+                            <a class="dropdown-item" href="/pole/pre-formation">Pré-Formation</a>
+                            <a class="dropdown-item" href="/pole/ecole-de-foot">École de foot</a>
+                            <a class="dropdown-item" href="/pole/feminines">Féminines</a>
+                            <a class="dropdown-item" href="/pole/futsal">Futsal</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/galerie">Galerie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shop">Catalogue</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sponsor">Partenaires</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+	<footer th:fragment="bottom">
+        <div class="container-fluid ">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <img class="logo col-md-5" src="/img/logoClub/fco-logo.png" alt="logo">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <nav class="row text-wrap ">
+                                <h3 class="join-us col-md-12 text-center">Rejoignez-nous</h3>
+                                 <ul class="d-flex flex-wrap">
+                                    <li  class="col-md-6 col-lg-3 footerLogoBaniere"><a class="text-center d-flex justify-content-center" href="https://www.facebook.com/ForceCourageObstination" target="_blank"><img class="linkImg fb img-responsive" src="https://cdn3.iconfinder.com/data/icons/facebook-ui-flat/48/Facebook_UI-03-512.png" alt="fb logo"></a></li>
+                                    <li  class="col-md-6 col-lg-3 text-center footerLogoBaniere"><a class="text-center d-flex justify-content-center" href="https://www.fff.fr/" target="_blank"><img class="fff linkImg  img-responsive" src="https://upload.wikimedia.org/wikipedia/fr/thumb/4/43/Logo_%C3%89quipe_France_Football_2018.svg/679px-Logo_%C3%89quipe_France_Football_2018.svg.png" alt="fff"></a></li>
+                                    <li class="col-md-6 col-lg-3 footerLogoBaniere"><a class="text-center d-flex justify-content-center"  href="https://https://foot-centre.fff.fr" target="_blank"><img class="centre linkImg img-responsive" src="https://www.vibration.fr/upload/medias/Logo%20100%20ans%20VF.PNG" alt="fff"></a></li>
+                                    <li class="col-md-6 col-lg-3 text-center footerLogoBaniere"><a class="text-center d-flex justify-content-center"  href="https://foot-loiret.fff.fr/" target="_blank"><img class="district linkImg img-responsive" src="https://www.smocfoot.net/media/uploaded/sites/12159/partenaire/58c162d89508a_district.png" alt="district du loiret"></a></li>
+                                 </ul>  	
+                                 <div class=" text-center footClubsLiRow mb-3">
+	                             	<a class="d-flex justify-content-center" href="https://footclubs.fff.fr/" target="_blank"><img class="footclub img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRthG0HVv7Zqkdc_LeQQEgv4P2KVlWIJaw6HQ6oVaAnjQFdJux-jw&s" alt="footclub"></a>
+                                 </div>
+                                 </nav>
+                        	</div>
+                   	 	</div>
+                	</div>
+                <div class="col-md-8">
+                    <div class="row pt-5">
+                        <div class="col-md-4 footerNavLink ">
+                            <nav class="footerNav ">
+                                <h3>évènements</h3>
+                                <ul class="pl-0">
+                                    <li><a href="/articles">Actualités</a></li>
+                                    <li><a href="/events">Evènements</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col-md-4 footerNavLink">
+                            <nav >
+                                <h3>club</h3>
+                                <ul class="pl-0">
+                                    <li><a href="/history?#VieDuClub">La vie du club</a></li>
+                                    <li><a href="/organizationalChart"> Organigramme</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col-md-4 footerNavLink">
+                            <nav>
+                                <h3>services</h3>
+                                <ul class="pl-0">
+                                    <li><a href="/contact">Contactez-nous</a></li>
+                                    <li><a href="#">Mentions légales</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="row pt-5">
+                        <div class="col-md-4 footerNavLink">
+                            <nav>
+                                <h3>boutique</h3>
+                                <ul class="pl-0">
+                                    <li><a href="/shop">Nos produits</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                         <div class="col-md-4 footerNavLink">
+                            <nav>
+                                <h3>sponsors</h3>
+                                <ul class="pl-0">
+                                    <li><a href="/sponsor">Nos partenaires</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+	
+</body>
+
+<div th:fragment="script">
+	<!-- Script for dropdown menu -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+		AOS.init({
+	    	once: true
+	    })
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/uikit@3.2.7/dist/js/uikit.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/uikit@3.2.7/dist/js/uikit-icons.min.js"></script>
+</div>
+
+</html>

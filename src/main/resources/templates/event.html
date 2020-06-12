@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head th:replace="fragment/layout.html :: head(~{::title},~{::link}, ~{})">
+  <title>F.C.O | Evènement</title>
+  <link rel="stylesheet" th:href="@{/css/event.css}">
+</head>
+
+<body>
+	<header th:replace="fragment/layout.html :: top"></header>
+
+	<section class="secEvent">
+		<div class="container col-11 py-5">
+			<div class="row">
+				<div class="col-md-5 col-12">
+					<img th:src="${event.picture}" class="img-fluid imgEvent">
+				</div>
+				<div class="col-md-7 col-12 d-flex flex-column justify-content-between p-3">
+					<div>
+						<h1 class="p-3" th:text="${event.title}">Titre de l'évènement</h1>
+		  				<div class="d-flex justify-content-between">
+		  					<p class="col-6" th:text="${places > 1 && timeLeft > 1} ? ${places} + ' places encore disponibles' : 'Plus de places disponibles'"></p>
+		  					<p class="col-6 text-right" th:text="${#dates.format(event.date,'dd MMM yyyy HH:mm')}">Date de l'évènement</p>
+						</div>
+						<hr class="col-10 offset-1" />
+						<h2 class="py-4 mx-3">Informations supplémentaires</h2>
+			  			<p class="mx-3" th:text="${event.content}">Lorem Ipsum Dolor Sit Amet</p>
+			  		</div>
+					<button th:if="${places > 1 && timeLeft > 1}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#register">S'inscrire à l'évènement</button>
+					<button th:unless="${places > 1 && timeLeft > 1}" type="button" class="btn btn-primary disabled">Inscription terminée</button>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="register" tabindex="-1">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">S'inscrire</h5>
+				    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				    	<span aria-hidden="true">&times;</span>
+				    </button>
+				</div>
+				<div class="modal-body">
+					<form id="inscription" method="post" th:action=@{|/event/${event.id}|} th:object="${entrant}">
+				    	<input name="id" th:field="*{id}" type="hidden">
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="lastname">Nom *</label>
+								<input type="text" class="form-control" id="lastname" name="lastname" th:field="*{lastname}" placeholder="John" required>
+								<span class="alert alert-danger p-2" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="firstname">Prénom *</label>
+								<input type="text" class="form-control" id="firstname" name="firstname" th:field="*{firstname}" placeholder="Doe" required>
+								<span class="alert alert-danger p-2" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="age">Age *</label>
+							<input type="number" class="form-control" id="age" name="age" th:field="*{age}" placeholder="18" required>
+							<span class="alert alert-danger p-2" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+						</div>
+						<div class="form-group">
+							<label for="phoneNumber">Numéro de téléphone *</label>
+							<input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" placeholder="01 23 45 67 89" required>
+							<span class="alert alert-danger p-2" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+						</div>	
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
+					<button type="submit" form="inscription" class="btn btn-primary">S'Inscrire</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="fragment/adminlayout.html :: toasts"></div>
+	
+	<section th:replace="fragment/sponsor.html :: sponsorbar"></section>
+	<footer th:replace="fragment/layout.html :: bottom"></footer>
+	
+</body>
+<div th:replace="fragment/layout.html :: script"></div>
+<script th:if="${hasErrors}">
+	$(document).ready(function() {
+		console.log('function');
+        $('#register').modal('show');
+	});
+</script>
+</html>

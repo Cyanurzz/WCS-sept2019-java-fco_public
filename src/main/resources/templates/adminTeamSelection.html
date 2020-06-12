@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+	<link rel="stylesheet" href="/css/checkbox.css">
+<body>
+
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+	
+	<div class="content">
+		<div class="container col-11 my-5">
+			<h2>Créer un équipe</h2>
+			<form class="form d-flex flex-wrap py-3" id="convo" method="post" th:action="@{|/admin/team/${id}/selection|}" th:object="${convocation}">
+				<input name="id" th:field="*{id}" type="hidden">
+				<div class="inputGroup m-1" th:each="player: ${players}">
+					<input type="checkbox" th:id="|player${player.id}|" th:field="*{selection}" th:value="${player.id}" th:name="${player.firstname + player.id}"/>
+					<label th:for="|player${player.id}|" th:text="|${player.firstname} ${player.lastname}|">John Doe</label>
+				</div>
+			</form>
+			<div class="d-flex justify-content-between align-items-center">
+				<button type="submit" form="convo" class="btn btn-primary">Créer</button> 
+				<a href="/admin/team"><i class="fas fa-arrow-left"></i> Retour en arrière</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head th:replace="fragment/layout.html :: head(~{::title},~{::link}, ~{})">
+  <title>F.C.O St Jean de la Ruelle | Accueil</title>
+  <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+
+<body>
+	<header th:replace="fragment/layout.html :: top"></header>
+
+	<section class="secFirst d-flex">
+		<div id="carouselControls" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">
+				<div th:each="article, iter : ${primaryArticles}" th:class="${iter.index == 0} ? ' carousel-item active' : ' carousel-item'" th:id="|p${iter.index}|">
+					<a class="mainArticle visualArticle no-gutters" th:href="@{|/article/${article.id}|}">
+						<div class="thumbnail text-center bg-dark">
+							<img class="img-card img-fluid" th:src="${article.picture}" th:alt="|Visuel article : ${article.title}|" data-aos="fade" data-aos-duration="1000" data-aos-delay="200">
+							<div class="caption">
+								<div class="titleMainArticle row no-gutters col-12">
+									<div class= "row d-flex align-items-center col-8" data-aos="fade-up">
+										<p th:text="${article.division}" class="col-6 col-md-5 category"></p>
+										<p th:text="${#dates.format(article.date,'dd MMM yyyy')}" class="update col-6"></p>
+									</div>
+									<p th:text="${article.title}" class="cardTitle col-12" data-aos="fade-up">Titre d'article principal</p>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev"> 
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+			</a> 
+			<a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next"> 
+				<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
+			</a>
+		</div>
+  
+		<div class="container px-0 col-3 next-match" th:style="|background-image: url(${backgroundMatch.path});|">
+			<div class="match-infos d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="500">
+				<span class="match-equipe" th:text="${nextMatch.localTeam}">EquipeLorem Ipsum</span> 
+				<span class="match-division" th:text="${nextMatch.division}">Régionale 1</span>
+				<div
+					class="match-versus d-flex justify-content-between align-items-center">
+					<div class="match-logos d-flex justify-content-center">
+						<img class="logos" src="/img/logoClub/fco-logo.png" alt="Logo F.C.O">
+					</div>
+					<span class="match-vs d-flex justify-content-center">VS</span>
+					<div class="match-logos d-flex justify-content-center">
+						<img class="logos" th:src="${nextMatch.visiteurLogo}" th:alt="|Logo ${nextMatch.visiteurName}|">
+					</div>
+				</div>
+				<div class="match-clubs d-flex justify-content-center">
+					<span class="match-club">F.C.O</span>
+					<time class="match-date" th:text="${formatedMatchDate}">00 mon.</time>
+					<span class="match-club" th:text="${nextMatch.visiteurName}">Visiteur</span>
+				</div>
+				<div class="match-countdown mt-5 d-flex justify-content-center align-items-center" id="countdown" data-aos="fade" data-aos-delay="1000">
+					<span class="countdown-value" id="days">00</span> 
+					<span class="countdown-label">J</span>
+					<span class="countdown-value"id="hours">00</span>
+					<span class="countdown-label">H</span> 
+					<span class="countdown-value" id="mins">00</span> 
+					<span class="countdown-label">M</span>
+					<span class="countdown-value" id="secs">00</span> 
+					<span class="countdown-label">S</span>
+				</div>
+			</div>
+			<div class="match-footer py-1" data-aos="fade-up" data-aos-delay="800" data-aos-duration="1200">
+				<a class="btn see-matchs d-flex justify-content-center" href="https://foot-centre.fff.fr/recherche-clubs/?scl=386&tab=resultats&subtab=agenda" target="_blank">Voir les autres matchs</a>
+			</div>
+		</div>
+	</section>
+	
+	<section class="uk-section secArticles" th:style="|background-image: url(${backgroundAccueil.path});|">
+		<div class="uk-container uk-container-large uk-width-1">
+			<div class="d-flex justify-content-center mx-auto" uk-grid>
+				<div class="uk-width-4-5@l uk-width-1 uk-child-width-1" uk-grid>
+					<div class="uk-child-width-1-2@l uk-child-width-1" uk-grid>
+					    <div>
+							<div class="uk-inline uk-height-large@l uk-width-1 uk-overflow-hidden">
+								<a class="article-link" th:href="@{|/article/${secondArticle.id}|}"></a>
+								<div class="uk-card-badge uk-label" th:text="${secondArticle.division}">Badge</div>
+								<img class="article-image" th:src="${secondArticle.picture}" th:alt="|Visuel article : ${secondArticle.title}|">
+								<div class="uk-overlay uk-overlay-default uk-position-bottom">
+									<p class="uk-text-large@m uk-text-medium" th:text="${secondArticle.title}">Titre</p>
+								</div>
+					        </div>
+					    </div>
+					    <div>
+					        <iframe th:src="${video}" width="1920" height="1080" frameborder="0" allowfullscreen uk-responsive uk-video="automute: true"></iframe>
+					    	<div>
+					    	</div>
+					    </div>
+					</div>
+					<div class="uk-child-width-1-4@l uk-child-width-1-1" uk-grid>
+						<div th:each="thirdArticle, iter : ${thirdArticles}" th:if="${iter.index < 4}">
+							<div class="uk-card uk-card-default uk-height-large">
+								<a class="article-link" th:href="@{|/article/${thirdArticle.id}|}"></a>
+								<div class="uk-card-media-top uk-height-medium uk-overflow-hidden">
+									<img class="article-image" th:src="${thirdArticle.picture}" th:alt="|Visuel article : ${thirdArticle.title}|">
+								</div>
+								<div class="uk-card-body">
+									<div class="uk-card-badge uk-label" th:text="${thirdArticle.division}">Badge</div>
+									<h3 class="uk-card-title" th:text="${thirdArticle.title}">Title</h3>
+								</div>
+								<div class="uk-card-footer uk-position-bottom">
+									<p class="uk-text-meta uk-text-right" th:text="${#dates.format(thirdArticle.date,'dd MMM yyyy')}"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="uk-width-1-5@l uk-visible@l uk-width-0 uk-text-center uk-container uk-background-default rounded">
+					<h2 class="boutiqueTitle text-center">Boutique</h2>
+					<div id="carouselClothes" class="carousel slide row-6" data-ride="carousel">
+		 				 <div class="carousel-inner">
+		   					 <div th:each="product, iter : ${clothes}" th:class="${iter.index == 0} ? ' carousel-item active' : ' carousel-item'">
+		      					<a href="/shop"><img class="img-fluid d-block w-100" th:src="${product.picture}" th:alt="|Visuel vêtement : ${product.name}|"></a>
+		      					<p class="mx-auto col-12 d-flex justify-content-center" th:text="${product.name}"></p>
+		    				</div>
+					 	</div>
+					</div>
+					<div id="carouselGoodies" class="carousel slide row-6" data-ride="carousel">
+		 				 <div class="carousel-inner">
+		   					 <div th:each="product, iter : ${goodies}" th:class="${iter.index == 0} ? ' carousel-item active' : ' carousel-item'">
+		      					<a href="/shop"><img class="img-fluid d-block w-100" th:src="${product.picture}" th:alt="|Visuel produit : ${product.name}|"></a>	
+		      					<p class="mx-auto col-12 d-flex justify-content-center" th:text="${product.name}"></p>
+		    				</div>
+					 	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-flex justify-content-center pt-5">
+			<a href="/articles" class="uk-button uk-button-secondary uk-button-large">Plus d'articles</a>
+		</div>
+	</section>
+	
+	<div th:replace="fragment/adminlayout.html :: toasts"></div>
+	
+	<section th:replace="fragment/sponsor.html :: sponsorbar"></section>
+	<footer th:replace="fragment/layout.html :: bottom"></footer>
+	
+</body>
+
+<div th:replace="fragment/layout.html :: script"></div>
+<script src="/js/matchCountdown.js"></script>
+<script th:text="|let countDownDate = ${nextMatch.timeUntilMatch}|">
+	let countDownDate = new Date('2020-12-25 00:00:00').getTime();
+</script>
+
+</html>

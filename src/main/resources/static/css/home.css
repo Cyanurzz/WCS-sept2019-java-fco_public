@@ -1,0 +1,236 @@
+/* Next-Match */
+
+.next-match {
+	background-color: #E4DDD4;
+	border-left: solid 1px #fff;
+	background-color: #0E1111;
+	background-position: center;
+	box-shadow: inset 0px 0px 500px 0px rgb(50, 50, 50);
+}
+
+
+.match-footer {
+	background-color: #DC143C;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	color: #fff;
+	z-index: 1;
+}
+
+.match-footer:hover {
+	background-color: #DC1432;
+}
+
+.match-infos {
+	padding-top: 30%;
+}
+
+.match-equipe {
+	color: #fff;
+	text-align: center;
+	padding-bottom: 15px;
+}
+
+.match-division {
+	color: #8290AD;
+	text-align: center;
+	font-size: 0.9rem;
+}
+
+.match-versus {
+	padding: 10px 10%;
+}
+
+.match-logos {
+	width: 34%;
+}
+
+.match-vs {
+	width: 32%;
+	color: #fff;
+	font-size: 1.3rem;
+}
+
+.logos {
+	width: 70px;
+	max-width: 100%;
+}
+
+.match-clubs {
+	padding: 0 10%;
+}
+
+.match-club {
+	width: 34%;
+	color: #fff;
+	text-align: center;
+	font-size: 1.1rem;
+}
+
+.match-date {
+	width: 32%;
+	color: #DC143C;
+	text-align: center;
+}
+
+.countdown-value {
+	font-size: 2.5rem;
+	color: #fff;
+}
+
+.countdown-label {
+	color: #DC143C;
+	font-size: 1rem;
+	margin-left: 5px;
+	margin-right: 10px;
+}
+
+/* Main Article */
+
+.mainArticle .caption {
+	background: linear-gradient(rgba(50,50,50,0),rgba(50,50,50,1));
+    position: absolute;
+    width: 100%;
+    height : 100%;
+	bottom:0;
+}
+
+.titleMainArticle {
+	display:flex;
+	margin-left :1%;
+	color : whitesmoke;
+	font-size: 17pt;
+	bottom:0;
+	position : absolute;
+	font-family: 'Bebas Neue';
+	letter-spacing: 1pt;
+}
+
+/*VERSION SMARTPHONE*/
+@media screen and (max-width: 574px) {
+	
+	.mainArticle h2, h3{
+		font-size: 17pt;
+		text-align: center;
+		display: inline;
+	}
+}
+
+/*VERSION TABLETTE*/
+@media screen and (min-width : 574px) and (max-width: 1200px) {
+
+	.mainArticle h2, h3{
+		font-size: 12pt;
+		text-align: center;
+		display: inline;
+	}	
+
+}
+
+/* Articles */
+
+.secArticles {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	border-top: solid 1px white;
+	position: relative;
+	z-index: 2;
+}
+
+.thumbnail {
+	overflow:hidden;
+	max-height: 650px;
+}
+
+.boutiqueTitle:after {
+	content: "";
+	width: 10rem;
+	height: 6px;
+	background-color: #DC143C;
+	display: block;
+	margin: 0.9rem auto;
+	border-radius: 20px;
+}
+
+/* Section Articles */
+
+h3 {
+	font-size: 14pt !important;
+}
+
+.uk-label {
+	background: #DC143C;
+}
+
+.uk-height-medium {
+	height: 200px;
+}
+
+.uk-height-xl {
+	height: 940px;
+}
+
+.article-image {
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+	transition: all 3000ms;
+}
+
+.article-link {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	z-index: 2;
+}
+
+.uk-inline:hover .article-image {
+	transition: all 3000ms ease;
+	transform: scale(1.2);
+}
+
+.uk-card:hover .article-image {
+	transition: all 3000ms ease;
+	transform: scale(1.2);
+}
+
+.uk-button {
+	font-size: 16pt;
+	appearence: button;
+}
+
+@media only screen and (max-width: 1198px) {
+	
+	.uk-height-medium {
+		height: 300px;
+	}
+	
+	.first-article {
+		flex: 0 0 100% !important;
+		max-width: 100%;
+	}
+	
+	.next-match {
+		display: none;
+	}
+	
+}
+
+@media only screen and (max-width: 958px) {
+	
+	.uk-height-medium {
+		height: 200px;
+	}
+	
+	.uk-height-large {
+		height: 350px;
+	}
+	
+	.uk-card-title {
+		font-size: 11pt !important;
+	}
+	
+}

@@ -1,0 +1,106 @@
+body{
+	background-color:#E4DDD3;
+}
+
+.bodyCard{
+	display: flex;
+	flex-direction: column;
+	bottom : 0;
+}
+
+
+.thumbnail {
+	overflow:hidden;  
+	position: relative;
+	height:55%;
+}
+
+
+.update{
+	font-size: 1vw;
+	color: #C1C1C1;
+}
+
+.category{
+	color : #D74850;
+}
+
+.contentCard{
+	align-items: flex-end;
+}
+.cardTitle {
+	margin-top: 15px;
+}
+.border{
+	border-width:3pt !important;
+	border-color: #E4DDD3 !important;
+}
+
+.thirdCard{
+	border : 2px, solid , #8290AD;
+	background-color:white;
+	padding : 0;
+}
+.img-card{
+	
+	text-align:center;
+	position:center;
+	max-width: 100%;
+	object-fit: cover;
+}
+.update{
+	color: #C1C1C1;
+}
+.category{
+	color : #DC143C ; 
+}
+.visualArticle:hover img{
+	
+	transform:scale(1.2);
+	transition: all 3000ms ease;
+}
+.visualArticle img{
+	transition: all 3000ms;
+}
+/*VERSION SMARTPHONE*/
+@media screen and (max-width: 574px)
+{
+
+	.thirdCard {
+		margin-top : 1vh;
+		display: flex;
+	}
+	.thirdCard .thumbnail{
+
+		height:100%;
+		margin-left:0;	
+	}
+	
+	.thirdCard .thumbnail img {
+		height:20vh;
+		width:auto;
+		overflow: hidden;
+		position: relative;
+	}
+	.category{
+		margin-right :0;
+		bottom: 0;
+		font-size: 13pt;
+	}
+    .update{
+		font-size: 10pt;
+		margin-bottom: 0.2vh;
+	}
+}
+/*VERSION TABLETTE*/
+@media screen and (min-width : 574px) and (max-width: 1200px){
+	
+	.update{
+		font-size: 9pt;
+	}
+	.category {
+		font-size: 12pt;
+	}
+
+}
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head>
+
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+	<link rel = "stylesheet" href="/css/adminTableau.css">
+</head>
+
+<body>
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+	
+	<div class="content my-5">
+		<h2 class="offset-1">Gestion des Articles :</h2>
+		<div class="row my-2 d-flex justify-content-around">
+			<a class="btn" href="/admin/article/update"><i class="fas fa-plus"></i> Ajouter un article</a>
+			<a class="btn" th:href="@{/admin/video/update(id=1)}"><i class="fas fa-plus"></i> Modifier la vidéo</a>
+		</div>
+		
+		<div class="divTitle container col-10 d-flex py-2 border-bottom">
+			<div class="col-1">
+				<p>Id</p>
+			</div>
+			<div class="col-1">
+				<p>Division</p>
+			</div>
+			<div class="col-2">
+				<p>Auteur</p>
+			</div>
+			<div class="col-3">
+				<p>Titre</p>
+			</div>
+			<div class="col-2">
+				<p>Date</p>
+			</div>
+			<div class="col-2">
+				<p>Image</p>
+			</div>
+			<div class="col-1">
+				<p>Priorité</p>
+			</div>
+			
+		</div>
+		<div class="divMessage container col-10 d-flex py-2 border-bottom" th:each="article : ${articles}">
+			<div class="col-1">
+				<span th:text="${article.id}">id</span>
+			</div>
+			<div class="col-1">
+				<span th:text="${article.division}">Division</span>
+			</div>
+			<div class="col-2">
+				<p th:text="${article.author}">Auteur</p>
+			</div>
+			<div class="col-3">
+				<p th:text="${article.title}">Titre</p>
+			</div>
+			<div class="col-2">
+				<p th:text="${#dates.format(article.date,'dd MMM yyyy')}">Date</p>
+			</div>
+			<div class="col-2">
+				<img class="img-fluid img-responsive" th:src="${article.picture}">
+			</div>
+			<div class="col-1">
+				<span th:text="${article.priority}">Priorité</span>
+			</div>
+			<div class="d-flex flex-column edit-icons">
+				<a th:href="@{/admin/article/update(id=${article.id})}"><i class="fas fa-pen"></i></a>
+				<a th:href="@{/admin/article/delete(id=${article.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer cet article ?')"><i class="fas fa-trash-alt"></i></a>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragment/adminlayout.html :: toasts"></div>
+
+</body>
+
+</html>

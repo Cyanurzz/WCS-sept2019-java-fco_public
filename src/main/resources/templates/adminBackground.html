@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head>
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+	<link rel="stylesheet" href="/css/backgrounds.css">
+</head>
+
+<body>
+
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+	
+	<div class="content my-5">
+		<div class="tab-nav">
+			<div class="container md-col-10 sm-col-12 md-offset-1 sm-offest-0">
+				<nav class="nav d-flex justify-content-center">
+					<a data-toggle="tab" th:each="background, iter : ${backgrounds}" th:class="${iter.index == 0} ? 'nav-item nav-link active' : 'nav-item nav-link'" th:href="|#p${iter.index}|" th:text="${background.name}">Background</a>
+				</nav>
+			</div>
+		</div>
+		
+		<div class="tab-content">
+			<div th:each="background, iter : ${backgrounds}" th:class="${iter.index == 0} ? 'tab-pane fade active show container col-11 py-5' : 'tab-pane fade container col-11 py-5'" th:id="|p${iter.index}|">
+				<div class="container d-flex flex-column">
+					<div class="col-12 d-flex justify-content-center">
+						<img class="img-fluid" th:src="${background.path}" th:alt="|Background ${background.name}|">
+					</div>
+					<form class="col-12 my-5" method="post" th:action="@{/admin/backgrounds}" enctype="multipart/form-data">
+						<input name="id" th:value="${background.id}" type="hidden">
+						<div class="form-row justify-content-around">
+							<div class="form-group">
+								<label for="background-file">Nouvelle Image</label>
+								<input id="background-file" name="imageFile" type="file" class="form-control-file" required>
+							</div>
+							<div class="form-group">
+								<input type="submit" value="Modifier" class="btn btn-primary">
+								<a class="btn btn-danger" th:href="@{|/admin/backgrounds/remove${background.id}|}" onclick="return confirm('Etes vous sûr de vouloir retirer ce fond (remplacé par un fond noir) ?')">Retirer</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="fragment/adminlayout.html :: toasts"></div>
+	
+</body>
+	<div th:replace="fragment/layout.html :: script"></div>
+</html>

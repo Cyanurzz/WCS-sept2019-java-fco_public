@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head th:replace="fragment/layout.html :: head(~{::title},~{::link}, ~{})">
+  <title>F.C.O | Partenaires</title>
+  <link rel="stylesheet" th:href="@{/css/stylePageSponsor.css}">
+</head>
+<body>
+	<header th:replace="fragment/layout.html :: top"></header>
+
+	<div class="container  col-11 my-5">
+		<h1 class="text-center">Nos Partenaires</h1>
+		<hr class="my-5" />
+		<div class="divSponsor">
+			<a class="cadreImg d-flex justify-content-center align-items-center" th:each="sponsor : ${sponsorList}" th:href="@{${sponsor.urlPageSponsor}}" target="_blank" data-aos="zoom-in" data-aos-duration="1000">
+				<img class="img-fluid imgSponsor" th:src="@{${sponsor.urlPhoto}}" th:alt="|Logo ${sponsor.name}|">
+			</a>
+		</div>
+	</div>
+
+	<section th:replace="fragment/sponsor.html :: sponsorbar"></section>
+	<footer th:replace="fragment/layout.html :: bottom"></footer>
+</body>
+
+<div th:replace="fragment/layout.html :: script"></div>
+</html>

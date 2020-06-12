@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head th:replace="fragment/layout.html :: head(~{::title},~{::link}, ~{})">
+  <title>F.C.O | Contact</title>
+  <link rel="stylesheet" th:href="@{/css/contact.css}">
+</head>
+
+<body>
+	<header th:replace="fragment/layout.html :: top"></header>
+
+	<section class="secContact py-5">
+		<div class="container divContact">
+			<div class="row">
+				<div class="col-lg-4 col-md-12" data-aos="fade-right" data-aos-duration="1000">
+					<div class="card">
+						<h2 class="contactTitle">Informations</h2>
+						<p th:text="${contact.address}">123 rue Victor Hugo</p>
+						<div class="socialLinks">
+							<a th:href="${contact.facebook}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+							<a th:href="${contact.instagram}" target="_blank"><i class="fab fa-instagram fa-lg"></i></a>
+							<a th:href="${contact.youtube}" target="_blank"><i class="fab fa-youtube"></i></a>
+						</div>
+						<p class="discover">Si vous souhaitez venir découvrir l’activité, contactez nous par :</p>
+						<p th:text="|Téléphone : ${contact.phone}|">Téléphone : 01 23 45 67 89</p>
+						<p th:text="|Mail : ${contact.mail}|"> Mail : xyz@gmail.com</p>
+					</div>
+				</div>
+				<div class="col-8 plan d-lg-block d-none" data-aos="fade-left" data-aos-duration="1000">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.8882510149833!2d1.8691431515367454!3d47.899848179103124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e4e54ece39a715%3A0x7de00cd2e79b1e1a!2sImpasse%20Paul%20Bert%2C%2045140%20Saint-Jean-de-la-Ruelle!5e0!3m2!1sfr!2sfr!4v1579257995359!5m2!1sfr!2sfr"
+						frameborder="0" allowfullscreen="">
+					</iframe>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="secForm py-5" id="form">
+		<div class="container my-5 d-flex flex-column align-items-center" data-aos="fade-up" data-aos-duration="1000">
+			<h2 class="contactTitle formTitle">Nous Contacter</h2>
+			<form class="contactForm col-12" method="post" th:action=@{/contact#form}>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="contact-firstname">Prénom</label>
+						<input type="text" class="form-control" id="contact-firstname" name="firstname" placeholder="John" maxlength="30" required>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="contact-lastname">Nom</label>
+						<input type="text" class="form-control" id="contact-lastname" name="lastname" placeholder="Doe" maxlength="30" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="contact-email">Adresse mail</label>
+					<input type="email" class="form-control" id="contact-email" name="email" placeholder="xyz@gmail.com" maxlength="30" required>
+				</div>
+				<div class="form-group">
+					<label for="contact-content">Message</label>
+					<textarea class="form-control" id="contact-content" name="content" placeholder="Votre message" maxlength="1000" required></textarea>
+				</div>
+				<div class="text-center">
+					<button type="submit" class="btn my-1 rounded-pill">Envoyer</button>
+				</div>
+			</form>
+		</div>
+	</section>
+	<section th:replace="fragment/sponsor.html :: sponsorbar"></section>
+	<footer th:replace="fragment/layout.html :: bottom"></footer>
+	
+	<div th:replace="fragment/adminlayout.html :: toasts"></div>
+</body>
+	<div th:replace="fragment/layout.html :: script"></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="/js/alertsFadeOut.js"></script>
+</html>

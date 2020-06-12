@@ -1,0 +1,28 @@
+.photoProduct{
+	display: flex !important;
+	justify-content: center !important;
+}
+
+.card-img-top {
+	width: 80% !important;
+	padding: 20px !important;
+	object-fit: scale-down !important;
+}
+.textOverFlow{
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-height: 45px;
+	
+}
+
+
+
+@media screen and (max-width: 500px) {
+	
+	h1{
+		font-size: 1.5rem !important;
+		margin-left: 10px !important;
+	}
+
+}

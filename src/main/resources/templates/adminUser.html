@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head>
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+	<link rel="stylesheet" href="/css/adminTableau.css">
+</head>
+
+<body>
+
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+	
+	<div class="content my-5">
+		<h2 class="offset-1">Gérer les utilisateurs et leurs privilèges</h2>
+		<a class="btn my-2 offset-1" href="/admin/user/update"><i class="fas fa-plus"></i> Créer un utilisateur</a>
+		<div class="divTitle container col-10 d-flex py-2 border-bottom">
+			<div class="col-3">
+				<p>Nom d'utilisateur</p>
+			</div>
+			<div class="col-2">
+				<p>Prénom</p>
+			</div>
+			<div class="col-2">
+				<p>Nom</p>
+			</div>
+			<div class="col-3">
+				<p>Email</p>
+			</div>
+			<div class="col-2">
+				<p>Role</p>
+			</div>
+		</div>
+		<div class="divMessage container col-10 d-flex py-2 border-bottom" th:each ="user : ${user}" >
+		    <div class="col-3">
+				<p th:text="${user.username}">Nom d'utilisateur</p>
+			</div>
+			<div class="col-2">
+				<p th:text="${user.firstname}">Prénom</p>
+			</div>
+			<div class="col-2">
+				<p th:text="${user.lastname}">Nom</p>
+			</div>
+			<div class="col-3">
+				<p th:text="${user.email}">Email</p>
+			</div>
+			<div class="col-2">
+				<p th:text="${user.role}">Role</p>
+			</div>
+			<div class="d-flex flex-column edit-icons">
+				<a th:href="@{/admin/user/update(id=${user.id})}"><i class="fas fa-pen"></i></a>
+				<a th:if="${user.id != 1}" th:href="@{|/admin/user/delete${user.id}|}"onclick="return confirm('Etes vous sûr de vouloir supprimer cet utilisateur ?')"><i class="fas fa-trash-alt"></i></a>
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="fragment/adminlayout.html :: toasts"></div>
+	
+</body>
+
+</html>

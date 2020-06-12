@@ -1,0 +1,41 @@
+.divSponsor {
+	max-width: 1400px;
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.cadreImg {
+	height: 350px;
+	width: 350px;
+}
+
+.cadreImg:nth-child(8n-6), .cadreImg:nth-child(8n-3), .cadreImg:nth-child(8n-1), .cadreImg:nth-child(8n-4) {
+	background-color: #F4F4F4;
+}
+
+.cadreImg:hover {
+	border-bottom: solid 2px #DC143C;
+}
+
+.cadreImg:hover img {
+	transform: scale(1.2);
+	transition: all 1000ms ease;
+}
+
+.imgSponsor {
+	max-width: 40%;
+	transition: all 1000ms;
+}
+
+@media only screen and (max-width: 1558px) {
+	
+	.divSponsor {
+		justify-content: space-around;
+	}
+	
+	.cadreImg:nth-child(2n+1) {
+		background-color: #FFF;
+	}
+	
+}

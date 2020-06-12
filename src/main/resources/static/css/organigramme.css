@@ -1,0 +1,68 @@
+.secOrga {
+	background-size: cover;
+	background-position: center;
+	background-color: #1C1C1C;
+}
+
+h2 {
+	text-align: center;
+	padding: 40px 0px;
+	color: #fff;
+	text-transform: uppercase;
+}
+
+.rowOrga {
+	margin-bottom: 50px;
+}
+.rowOrgaEnd {
+	padding-bottom:50px;
+}
+
+.person-card {
+	position: relative;
+	height: 300px;
+	width: 320px;
+	overflow: hidden;
+}
+
+.person-img {
+	width: 100%;
+	height: auto;
+}
+
+.person-info {
+    position: absolute;
+    top: calc(300px - 64px);
+    height: 300px;
+    width: 100%;
+    color: #fff;
+    background-color: #DC143C;
+    opacity: 0.9;
+    -ms-transition: -ms-transform 0.75s;
+    -webkit-transition: -webkit-transform 0.75s;
+    transition: transform 0.75s;
+}
+
+.person-card:hover > .person-info {
+	-ms-transform: translateY(-236px);
+	-webkit-transform: translateY(-236px);
+	transform: translateY(-236px);
+}
+
+.details-title {
+	font-size: 18px;
+	padding: 10px;
+}
+
+small {
+	font-size: 14px;
+	color: #f7f7f7;
+}
+
+.details-body {
+	padding: 10px;
+	text-align: center;
+}
+.orgaTab {
+	padding:37px 20px 35px;
+}

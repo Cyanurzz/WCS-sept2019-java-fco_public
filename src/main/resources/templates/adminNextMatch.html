@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head>
+
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+</head>
+
+<body>
+
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+
+	<div class="content">
+		<div class="container my-5 col-10 offset-1">
+			<h2>Modifier le prochain Match</h2>
+			<form method="post" th:action=@{/admin/next-match} enctype="multipart/form-data" class="my-5">
+				<input name="id" value="1" type="hidden">
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="team-name">Nom de l'équipe locale *</label>
+						<input type="text" class="form-control" id="team-name" name="teamName" placeholder="Equipe U15" required>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="team-divison">Division *</label>
+						<input type="text" class="form-control" id="team-division" name="teamDivision" placeholder="Régionale 1" required>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="match-date">Date de la rencontre *</label>
+						<input type="date" class="form-control" id="match-date" name="matchDate" required>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="match-hour">Heure de la rencontre *</label>
+						<input type="time" class="form-control" id="match-hour" name="matchHour" required>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="team-visitor">Équipe Visiteurs *</label>
+						<input type="text" class="form-control" id="team-visitor" name="visitorName" placeholder="Saran USM" required>
+					</div>
+					<div class="form-group col-md-6">
+					    <label for="logo-visitor">Logo Visiteurs *</label>
+					    <input type="file" class="form-control-file" id="logo-visitor" name="visitorLogo" required>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary my-1">Modifier</button>
+			</form>
+		</div>
+	</div>
+	<div th:replace="fragment/adminlayout.html :: toasts"></div>
+</body>
+
+</html>

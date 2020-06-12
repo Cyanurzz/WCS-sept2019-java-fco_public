@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/layout.html :: head(~{::title},~{::link}, ~{})">
+  <title>F.C.O | Panier</title>
+  <link rel="stylesheet" th:href="@{/css/cart.css}">
+</head>
+
+<body class="cart-v1 hidden-sn white-skin animated">
+	<header th:replace="fragment/layout.html :: top"></header>
+	<ul class="row mx-5 justify-content-between">
+		<li class="main navbar-nav">
+			<div class="clearfix my-4">
+				<h1>Panier</h1>
+			</div>
+		</li>
+	</ul> 
+	<div class="container">
+		<section class="section my-5 pb-5">
+			<div class="table-responsive">
+				<table class="table product-table">
+					<thead>
+						<tr>
+							<th></th>
+							<th class="font-weight-bold "><h4>Produit</h4></th>
+							<th class="font-weight-bold"><h4>Taile</h4></th>
+							<th></th>
+							<th class="font-weight-bold " colspan="2"><h4>Prix</h4></th>
+							<th class="font-weight-bold  "><h4>Qantité</h4></th>
+							<th class="font-weight-bold "><h4>Montant</h4></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="produtInCart : ${ProductInCart}">
+							<th scope="row" class=" d-flex justify-content-center border-0 ">
+								<div class="col-lg-6 col-md-12 col-5">
+									<img th:src="@{${produtInCart.product.picture}}" alt=""
+										class="img-fluid ">
+								</div>
+							</th>
+							<td>
+								<h5 class="mt-3">
+									<strong th:text="${produtInCart.product.name}">iPhone</strong>
+								</h5>
+
+							</td>
+							<td th:text="${produtInCart.size}">S</td>
+							<td></td>
+							<td class="productPrice" colspan="2"
+								th:text="${produtInCart.product.price}">800</td>
+							<td class="text-center text-md-left"><span class="qty"
+								th:text="${produtInCart.quantity}">1</span></td>
+							<td class="font-weight-bold"><strong class="amount"
+								th:text="${produtInCart.product.price * produtInCart.quantity }">$800</strong>
+							</td>
+							<td><a
+								th:href="|/cart/delete?idProductInCart=${produtInCart.id}&idPanier=${idPanier}|"
+								class="btn btn-sm btn-primary py-0 px-3  py-md-1 px-md-3">X
+							</a></td>
+						</tr>
+						<tr>
+							<td colspan="1"></td>
+							<td colspan="1">
+								<h4 class="mt-2  ">
+									<strong class="col-5">Total</strong>
+								</h4>
+							</td>
+							<td class="text-right">
+								<h4 class="mt-2 ">
+									<strong id="total">0</strong>
+								</h4>
+							</td>
+							<td colspan="6" class="text-right"><a type="button"
+								class="btn btn-primary btn-rounded col-12"
+								data-target="#cart-modal-ex" data-toggle="modal">commander <i
+									class="fas fa-angle-right right"></i>
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</section>
+	</div>
+	<div class="modal fade cart-modal" id="cart-modal-ex" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title font-weight-bold dark-grey-text"
+						id="myModalLabel">Informations</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>			
+				<div class="modal-body">
+					<div class="wrapper wrapper--w680">
+						<div class="card card-1">
+							<div class="card-body">
+								<form method="post" th:action="@{/cart}"
+									th:object="${client}">
+
+									<div class="row row-space">
+										<div class="col-6">
+											<div class="input-group">
+												<input class="input--style-1" type="text"
+													placeholder="Nom *" th:field="*{firstname}" required>
+													<span class="alert alert-danger p-2" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></span>
+											</div>
+										</div>
+										<div class="col-6">
+											<div class="input-group">
+												<input class="input--style-1" type="text"
+													placeholder="Prenom *" th:field="*{lastname}" required>
+											</div>
+											<span class="alert alert-danger p-2" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
+										</div>
+									</div>
+									<div class="input-group">
+										<input class="input--style-1" type="email"
+											placeholder="Email *" th:field="*{email}" required>
+									</div>
+									<div class="input-group">
+										<input class="input--style-1" type="text"
+											placeholder="Numero de telephone *" th:field="*{phoneNumber}"
+											required>
+										<span class="alert alert-danger p-2" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>	
+									</div>
+
+									<div class="form-group">
+										<label for="contact-content">plus de détails sur la
+											commande</label>
+										<textarea class="form-control" id="contact-content"
+											name="content" placeholder="message" maxlength="1000"
+											th:field="*{message}"></textarea>
+									</div>
+
+									<div class="p-t-20">
+										<button class="btn btn--radius btn--black" type="submit">Confirmer</button>
+									</div>
+
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<section th:replace="fragment/sponsor.html :: sponsorbar"></section>
+	<footer th:replace="fragment/layout.html :: bottom"></footer>
+  
+
+	<script type="text/javascript">
+	var prices = document.getElementsByClassName("productPrice");
+	var quatitys = document.getElementsByClassName("qty");
+	var amount = document.getElementsByClassName("amount");
+	var total = document.getElementById("total");
+	for (var i = 0; i < prices.length; i++) {
+	 amount[i].innerHTML =  prices[i].innerHTML * quatitys[i].innerHTML ;
+		total.innerHTML = (total.innerHTML*1 +  amount[i].innerHTML*1) ;
+	}
+	</script>
+
+   <div th:replace="fragment/layout.html :: script"></div>
+  <script th:if="${hasErrors}">
+ 
+  
+	$(document).ready(function() {
+		console.log('function');
+        $('#cart-modal-ex').modal('show');
+	});
+
+
+</script>
+
+</body>
+</html>

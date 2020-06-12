@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head>
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+	<link rel="stylesheet" href="/css/adminMessage.css">
+</head>
+
+<body>
+
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+
+	<div class="content">
+		<div class="container my-5 col-10 offset-1">
+			<h2 th:text="${sponsor.id} ? 'Editer un Sponsor' : 'Créer un Sponsor'">Gérer le Sponsor</h2>
+			<form method="post" th:action=@{/admin/sponsor/update} enctype="multipart/form-data" th:object="${sponsor}" class="my-5">
+				<input name="id" th:field="*{id}" type="hidden">
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="sponsor-name">Nom du Sponsor *</label>
+						<input type="text" class="form-control" id="sponsor-name" th:field="*{name}" placeholder="Umbro" required>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="sponsor-link">Lien vers le site du Sponsor *</label>
+						<input type="text" class="form-control" id="sponsor-link" th:field="*{urlPageSponsor}" placeholder="http://xyz.fr" required>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="sponsorPriority">Priorité *</label>
+						<input type="number" class="form-control" id="sponsor-priority" th:field="*{priority}" required>
+					</div>
+					<div class="form-group col-md-4 offset-2">
+					    <label for="sponsor-logo">Logo du site *</label>
+					    <input type="file" class="form-control-file" id="sponsor-logo" th:field="*{urlPhoto}" required>
+					</div>
+				</div>
+				<div class="d-flex justify-content-between align-items-center">
+					<input type="submit" th:value="${sponsor.id} ? 'Modifier' : 'Créer'" class="btn btn-primary">
+					<a href="/admin/sponsor"><i class="fas fa-arrow-left"></i> Retour en arrière</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+
+</html>

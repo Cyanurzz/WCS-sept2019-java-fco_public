@@ -1,0 +1,112 @@
+/*===== History club =====*/
+
+.secHistoire {
+	background-color: #1C1C1C;
+	overflow:hidden;
+}
+
+h1 {
+	font-size: 30pt;
+	text-transform: uppercase;
+	color: #fff;
+}
+
+.paragrapheImage {
+	margin-right: -12%;
+}
+
+.paragrapheImage2 {
+	margin-left: -12%;
+}
+
+.paragraphText {
+	font-size: 13pt;
+	margin-left: 70px;
+}
+
+.paragraphText2 {
+	font-size: 13pt;
+	margin-right: 70px;
+}
+
+.paragrapheRow:nth-child(even) {
+	flex-direction:row-reverse;
+}
+
+.imgHistoire {
+	padding: 20px;
+	border: solid 1px #DC143C;
+}
+
+.divSeparator {
+	height: 150px;
+	background-color: #1C1C1C;
+}
+
+@media only screen and (max-width: 1630px) {
+	
+	.paragraphText, .paragraphText2 {
+		font-size: 11pt;
+	}
+	
+}
+
+@media only screen and (max-width: 1450px) {
+	
+	.paragraphText, .paragraphText2 {
+		font-size: 10pt;
+	}
+	
+}
+
+@media only screen and (max-width: 1199px) {
+	
+	.paragraphText, .paragraphText2 {
+		font-size: 13pt;
+		margin: 0;
+	}
+	
+	.paragrapheImage, .paragrapheImage2 {
+		display: flex;
+		justify-content: center;
+		margin-top: 50px;
+	}
+	
+}
+
+@media only screen and (max-width: 991px) {
+
+	.paragraphText, .paragraphText2 {
+		font-size: 12pt;
+	}
+	
+	.divSeparator {
+		display: none;	
+	}
+	
+	h1 {
+		font-size: 25pt;
+	}
+	
+	h2 {
+		font-size: 20pt;
+	}
+	
+}
+
+/*===== // History Card =====*/
+.card {
+	text-align:center;
+}
+
+.containerCard {
+	display:flex;
+	flex-direction:row;
+	justify-content:space-around;
+	margin:20px 0;
+}
+
+.containerCard div {
+	margin :20px 0;
+	padding:20px;
+}

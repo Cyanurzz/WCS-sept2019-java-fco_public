@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+	<head>
+		<head th:replace="fragment/adminlayout.html :: head"></head>
+		<link rel="stylesheet" href="/css/adminTableau.css">
+	</head>
+	<body>
+		<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+		<nav class="d-flex justify-content-center mt-5">
+			<div class="nav nav-tabs my-5 mx-5" id="nav-tab" role="tablist">
+				<a class="nav-item nav-link active" id="nav-orga-admin" data-toggle="tab" href="#admin" role="tab">Organigramme Administratif</a>
+				<a class="nav-item nav-link" id="nav-orga-sport" data-toggle="tab" href="#sport" role="tab">Organigramme Sportif</a>
+			</div>
+		</nav>
+		<div class="tab-content content my-5" id="nav-tabContent">
+			<div class="tab-pane fade show active mx-5 my-5" id="admin" role="tabpanel" aria-labelledby="nav-orga-admin">
+				<div >
+					<h2 class="offset-1">Gestion de l'organigramme  administratif :</h2>
+					<a class="btn my-2 offset-1" href="/admin/staff/update"><i class="fas fa-plus"></i> Ajouter un membre</a>
+					<div class="divTitle container col-11 d-flex py-2 border-bottom">
+						<div class="sendInfos col-2">
+							<p>Nom</p>
+						</div>
+						<div class="sendDate col-2">
+							<p>Prénom</p>
+						</div>
+						<div class="sendDate col-1">
+							<p>Fonction</p>
+						</div>
+						<div class="sendDate col-1">
+							<p>Catégorie</p>
+						</div>
+						<div class="sendDate col-4">
+							<p>Infos intéressantes</p>
+						</div>
+						<div class="sendDate col-2">
+							<p>Photos</p>
+						</div>
+					</div>
+				</div>
+				<div class="divMessage container col-11 d-flex py-2 border-bottom" th:each="staff : ${staff}" th:if="${staff.category != 'sportif'}">
+					<div class="col-2">
+						<span th:text="|${staff.lastname}">Doe</span>
+					</div>
+					<div class="col-2">
+						<span th:text="|${staff.firstname}">John</span>
+					</div>
+					<div class="col-1">
+						<span th:text="|${staff.fonction}">Fonction</span>
+					</div>
+					<div class="col-1">
+						<span th:text="|${#strings.toUpperCase(staff.category)}">category</span>
+					</div>
+					<div class="col-4">
+						<span th:text="|${staff.description}">description</span>
+					</div>
+					<div class="col-2">
+						<img class="img-fluid img-sponsor" th:src="${staff.picture == ''} ? '/uploads/img/photoStaff/default.jpg' : ${staff.picture}">
+					</div>
+					<div class="d-flex flex-column edit-icons">
+						<a th:href="@{/admin/staff/update(id=${staff.id})}"><i class="fas fa-pen"></i></a>
+						<a th:href="@{|/admin/staff/delete${staff.id}|}" onclick="return confirm('Etes vous sûr de vouloir supprimer ce membre ?')"><i class="fas fa-trash-alt"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade my-5 mx-5" id="sport" role="tabpanel" aria-labelledby="nav-orga-sport">
+				<div>
+					<h2 class="offset-1">Gestion de l'organigramme  sportif :</h2>
+					<a class="btn my-2 offset-1" href="/admin/staff/update"><i class="fas fa-plus"></i> Ajouter un membre</a>
+					<div class="divTitle container col-11 d-flex py-2 border-bottom">
+						<div class="sendInfos col-2">
+							<p>Nom</p>
+						</div>
+						<div class="sendDate col-2">
+							<p>Prénom</p>
+						</div>
+						<div class="sendDate col-1">
+							<p>Fonction</p>
+						</div>
+						<div class="sendDate col-1">
+							<p>Catégorie</p>
+						</div>
+						<div class="sendDate col-4">
+							<p>Infos intéressantes</p>
+						</div>
+						<div class="sendDate col-2">
+							<p>Photos</p>
+						</div>
+					</div>
+				</div>
+				<div class="divMessage container col-11 d-flex py-2 border-bottom" th:each="staff : ${staff}" th:if="${staff.category == 'sportif'}">
+					<div class="col-2">
+						<span th:text="|${staff.lastname}">Doe</span>
+					</div>
+					<div class="col-2">
+						<span th:text="|${staff.firstname}">John</span>
+					</div>
+					<div class="col-1">
+						<span th:text="|${staff.fonction}">Fonction</span>
+					</div>
+					<div class="col-1">
+						<span th:text="|${#strings.toUpperCase(staff.category)}">category</span>
+					</div>
+					<div class="col-4">
+						<span th:text="|${staff.description}">description</span>
+					</div>
+					<div class="col-2">
+						<img class="img-fluid img-sponsor" th:src="${staff.picture == ''} ? '/uploads/img/photoStaff/default.jpg' : ${staff.picture}">
+					</div>
+					<div class="d-flex flex-column edit-icons">
+						<a th:href="@{/admin/staff/update(id=${staff.id})}"><i class="fas fa-pen"></i></a>
+						<a th:href="@{|/admin/staff/delete${staff.id}|}" onclick="return confirm('Etes vous sûr de vouloir supprimer ce membre ?')"><i class="fas fa-trash-alt"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div th:replace="fragment/adminlayout.html :: toasts"></div>
+	</body>
+	<div th:replace="fragment/layout.html :: script"></div>
+</html>

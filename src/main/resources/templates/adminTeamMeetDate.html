@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+	<link rel = "stylesheet" href="/css/adminTableau.css">
+	<link rel = "stylesheet" href="/css/adminlayout.css">
+<body>
+
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+	
+	<div class="content container px-5 py-5">
+		<h2>Crée un équipe</h2>
+		<form  method="post" th:action="@{|/admin/team/${id}/meet|}" th:object="${convocation}" enctype="multipart/form-data">
+			<input name="id" th:field="*{id}" type="hidden">
+			
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="matchDate">Date du Match</label>
+					<input type="date" class="form-control" id="matchDate" name="matchDate" required>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="matchHour">Heure du Match </label>
+					<input type="time" class="form-control" id="matchHour" name="matchHour" required>
+				</div>
+			</div>
+				<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="matchDate">Date de Convocation</label>
+					<input type="date" class="form-control" id="matchDate" name="inviteDate" required>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="matchHour">Heure de Convocation </label>
+					<input type="time" class="form-control" id="matchHour" name="inviteHour" required>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label for="location">Lieu du match</label>
+					<input type="text" class="form-control" id="location" name="locationM" required>
+				</div>
+			</div>
+					<div class="form-row">
+				<div class="form-group col-md-12">
+					<label for="location">Lieu de Convocation</label>
+					<input type="text" class="form-control" id="location" name="locationI" required>
+				</div>
+			</div>
+			
+			<div class="d-flex justify-content-between align-items-center">
+				<input type="submit" value="Crée" class="btn btn-primary"> 
+				<a href="/admin/team"><i class="fas fa-arrow-left"></i> Retour en arrière</a>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

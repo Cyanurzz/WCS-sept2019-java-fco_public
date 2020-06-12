@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<section th:fragment="sponsorbar">
+		<div class="firstLevelSponsor" th:if="${sponsorList.size()>1}">
+			<th:block th:each="i: ${#numbers.sequence(0, 1)}">
+				<a href="/sponsor">
+					<img class="sponsorElement firstLevel" th:src="@{${sponsorList[i].getUrlPhoto()}}">
+				</a>
+			</th:block>
+		</div>
+
+		<div class="secondLevelSponsor" th:if="${sponsorList.size()>2}">
+			<th:block th:if="${i < 9}" th:each="i: ${#numbers.sequence(2, sponsorList.size()-1)}">
+				<a href="/sponsor">
+					<img class="sponsorElement secondLevel" th:src="@{${sponsorList[i].getUrlPhoto()}}">
+				</a>
+			</th:block>
+		</div>
+	</section>
+
+</body>
+</html>

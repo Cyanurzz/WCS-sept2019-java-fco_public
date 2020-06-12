@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head>
+	<head th:replace="fragment/adminlayout.html :: head"></head>
+	<link rel="stylesheet" href="/css/adminMessage.css">
+</head>
+
+<body>
+
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+
+    	<div class="content">
+		<div class="container my-5 col-10 offset-1">
+			<h2 >Ajouter une photo</h2>
+			<form method="post" th:action=@{/admin/galerie/update} th:object="${galerie}" class="my-5" enctype="multipart/form-data">
+				<input name="id" th:field="*{id}" type="hidden">
+				<div class="form-row">
+					<div class="form-group col-md-8">
+						<label for="galery-title">Titre</label>
+						<input type="text" class="form-control" id="galery-title" th:field="*{title}" placeholder="Titre de photo ou photos" >
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-3">
+						<label for="galery-content">Photo ou Photos *</label>
+						<input type="file" multiple class="form-control" id="galery-content" name = "photos" required>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary my-1" >Envoyer</button>
+			</form>
+		</div>
+	</div>
+	
+
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+body{
+	background-color: #1C1C1C;
+	background-position: center;
+	background-size: cover;
+}
+
+.cardTitle{
+	font-size : 30pt;
+	color: #DC1432;
+	padding : 1%;
+}
+hr{
+	color : #DC1432;
+}
+.article{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color:white;
+	padding:0;
+	border-radius:12px;
+	margin : 5% 0 5% 0;
+
+}
+
+.details{
+	display: flex;
+	justify-content: space-between;
+}
+
+.category{
+	font-size: 14pt;
+}
+
+.update{
+	color : grey;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.content{
+	font-size:15pt;
+}
+
+@media screen and (max-width: 992px){
+		
+	.article{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		background-color:white;
+		margin:0;
+		border-radius : 0;
+		
+	}
+	.update{
+		justify-content : flex-start;
+	}
+}

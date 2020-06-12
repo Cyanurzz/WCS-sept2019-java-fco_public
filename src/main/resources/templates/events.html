@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head th:replace="fragment/layout.html :: head(~{::title},~{::link}, ~{})">
+  <title>F.C.O | Evènements</title>
+  <link rel="stylesheet" th:href="@{/css/events.css}">
+</head>
+
+<body>
+	<header th:replace="fragment/layout.html :: top"></header>
+
+	<section class="my-5">
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+  			<li class="nav-item"><a class="nav-link navLink active" id="onCom" data-toggle="tab" href="#onComming" role="tab" aria-controls="home" aria-selected="true">Évènements à venir</a></li>
+  			<li class="nav-item"><a class="nav-link navLink" id="pastEvnts" data-toggle="tab" href="#pastEvents" role="tab" aria-controls="profile" aria-selected="false">Évènements passé</a></li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+  			<div class="tab-pane fade show active my-3 mx-3" id="onComming" role="tabpanel" aria-labelledby="home-tab">
+  				<h1 class="title">Évènements à venir </h1>
+  				<div class="row d-flex no-gutters" >
+  					<div th:each="event : ${events}" class=" mx-auto col-lg-3 col-11">
+  						<a th:href="@{|/event/${event.id}|}" >
+  							 
+  							<img th:if="${event.picture}" th:src="${event.picture}" alt="Évènement" class="card-img eventPicture">
+						</a>
+  					</div>
+				</div>		
+  			</div>
+  			<div class="tab-pane fade my-3 mx-3" id="pastEvents" role="tabpanel" aria-labelledby="profile-tab">
+  				<h1 class="title">Évènements Passé </h1>
+  				<div class="row d-flex no-gutters" >
+  					<div th:each="pastEvent : ${pastEvents}" class=" mx-auto col-lg-3 col-11">
+  						<a th:href="@{|/event/${pastEvent.id}|}">
+  							<img th:src="${pastEvent.picture}" class="card-img eventPicture">
+						</a>
+  					</div>
+				</div>	
+  			</div>
+		</div>
+	</section>
+	
+	<section th:replace="fragment/sponsor.html :: sponsorbar"></section>
+	<footer th:replace="fragment/layout.html :: bottom"></footer>
+	
+</body>
+<div th:replace="fragment/layout.html :: script"></div>
+</html>

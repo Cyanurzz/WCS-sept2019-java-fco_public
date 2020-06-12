@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head th:replace="fragment/adminlayout.html :: head"></head>
+
+<body>
+
+	<div th:replace="fragment/adminlayout.html :: sidebar"></div>
+	
+	<div class="content my-5">
+		<div class="container my-5 col-10 offset-1">
+			<h3 th:text="${article.id} ? 'Modifier un article' : 'Créer un article'">Article</h3>
+			<form method="post" th:action="@{/admin/article/update}" th:object="${article}" enctype="multipart/form-data">
+				<input name="id" th:field="*{id}" type="hidden">
+				<input name="author" th:field="*{author}" type="hidden" value="Admin">
+				<div class ="form-row">
+					<div class="form-group col-12 col-md-10">
+						<label for="title">Titre *</label> 
+						<input id="title" name="title" placeholder="Coupe d'Europe pour le FCO" required th:field="*{title}" type="text" class="form-control"> 
+					</div>
+					<div class="form-group col-12 col-md-2">
+						<label for="priority">Priorité *</label>
+						<select id="priority" name="priority" required th:field="*{priority}"  class="form-control">
+							<option value ="4">--</option>
+							<option value ="1">Article Principal</option>
+							<option value ="2">Article Secondaire</option>
+							<option value ="3">Article Important</option>
+						</select>
+					
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6 col-12">
+						<label for = "division">Division *</label>
+						<input id="division" name="division" required th:field="*{division}" type="text" class="form-control">
+					</div>
+					<div class="form-group col-md-5 col-12 offset-1">
+						<label for="picture">Image</label> 
+						<input id="picture" name="picture" th:value="*{picture}" type="file" class="form-control-file"> 
+					</div>
+				</div>
+				<div class="form-group ">
+					<label for="content">Contenu *</label> 
+					<textarea rows="15" id="content" name="content" required th:field="*{content}" class="form-control"></textarea>
+				</div>
+
+				<div class="d-flex justify-content-between align-items-center">
+					<input type="submit" th:value="${article.id} ? 'Modifier' : 'Créer'" class= "btn btn-primary">
+					<a href="/admin/article"><i class="fas fa-arrow-left"></i> Retour en arrière</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>
+
+
+
+

@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Sulphur Point', sans-serif;
+    word-wrap: break-word;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #F6F4EA;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul{
+	list-style: none;
+}
+
+/* Sidebar */
+
+.sidebar {
+	height: 100%;
+	width: 250px;
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	background-color: #0E1111;
+	color: #fff;
+}
+
+h1 {
+	font-size: 1.7rem;
+	text-transform: uppercase;
+	padding: 20px;
+}
+
+h1:hover {
+	color: #DC143C;
+}
+
+.side-item {
+	list-style: none;
+	font-size: 1.2rem;
+	padding: 8px 20px;
+}
+
+.side-item a{
+	width: 100%;
+	height: 100%;
+}
+
+.side-item:hover {
+	background-color: #DC143C;
+}
+
+.side-item:hover>.badge {
+	background-color: #0E1111;
+}
+
+.badge {
+	background-color: #DC143C;
+}
+
+.logoutButton {
+	width: 250px;
+	position: absolute;
+	bottom: 0;
+}
+
+/* Content */
+
+.content {
+	margin-left: 250px;
+}
+
+/* Alerts */
+
+.alerts {
+	position: fixed;
+	top: 0;
+	right: 0;
+}
+
+
+/* admin Team Update */
+.dateNextMatch{
+	font-size :16pt;
+}
+
+.animations {
+	animation-name: fadeInDown, fadeOutUp;
+	-webkit-animation-name: fadeInDown, fadeOutUp;
+	
+	animation-duration: 1s, 1s;
+	-webkit-animation-duration: 1s, 1s;
+	
+	animation-delay: 0s, 4s;
+	-webkit-animation-delay: 0s, 4s;
+}
+
