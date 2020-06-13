@@ -1,7 +1,7 @@
 # Redesign of the website FCO at WildCodeSchool
-## Manual 
 This Project has been build in 8 weeks. At this point I started coding three month ago.  
 We work in team with [Clement1987](https://github.com/Clement1987), [housseyn02](https://github.com/housseyn02) and  [et3rnity45](https://github.com/et3rnity45).  I can't show you the original repo, because it steel private ... By the way the Wild Code School gives us the right to show this project.
+## Manual 
 ### Requirements
 
 For building and running the application you need:
