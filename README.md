@@ -9,7 +9,7 @@ For building and running the application you need:
       - create database called `fcodb`    
       - a user `userfco`  
       - password : `userfco`
-      ( you can also modify user in `WCS-sept2019-java-fco_public/src/main/resources/application.properties`)
+        ( you can also modify user in `WCS-sept2019-java-fco_public/src/main/resources/application.properties`)
 - [JDK 11](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)
 - [Maven 3](https://maven.apache.org)
 
